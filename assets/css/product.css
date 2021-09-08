@@ -1,0 +1,54 @@
+.main-container {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-container .images {
+    padding-right: 20px;
+    width: 50%;
+}
+
+.main-container .images img {
+    max-width: 100%;
+}
+
+.main-container .info {
+    padding-left: 20px;
+}
+
+.main-container .info .category {
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.main-container .info h1.name {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.main-container .info p.price {
+    color: #0e36c9;
+    margin-top: 20px;
+    font-size: 35px;
+}
+
+.main-container .info .btn-buy {
+    background-color: #0e36c9;
+    color: #fff;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 0;
+    text-decoration: none;
+    padding: 10px 50px;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    border: 1px solid #fff;
+}
+
+.main-container .info .btn-buy:hover {
+    background-color: #fff;
+    color: #0e36c9;
+    border: 1px solid #0e36c9;
+}
