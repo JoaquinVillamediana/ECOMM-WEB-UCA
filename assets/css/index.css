@@ -25,6 +25,7 @@ section.top-products .items {
 }
 
 section.top-products .items .item {
+    min-width: 200px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     width: 22%;

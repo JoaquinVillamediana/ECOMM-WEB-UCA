@@ -33,3 +33,9 @@ header .container .links .link {
     text-decoration: none;
     margin: 0 5px;
 }
+
+@media screen and (max-width: 992px) {
+    .container {
+        max-width: 95%;
+    }
+}

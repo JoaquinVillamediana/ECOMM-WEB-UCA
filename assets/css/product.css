@@ -52,3 +52,17 @@
     color: #0e36c9;
     border: 1px solid #0e36c9;
 }
+
+@media screen and (max-width: 992px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .main-container .images {
+        margin: 0 auto;
+        width: 90%;
+        padding-right: 0;
+    }
+    .main-container .info h1.name {
+        font-size: 22px;
+    }
+}
