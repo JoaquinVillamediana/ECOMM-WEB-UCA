@@ -34,6 +34,11 @@ header .container .links .link {
     margin: 0 5px;
 }
 
+.descrip {
+    float: left;
+    
+}
+
 @media screen and (max-width: 992px) {
     .container {
         max-width: 95%;
