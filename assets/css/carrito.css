@@ -20,6 +20,11 @@ ul.progress_carrito li{
     position: relative;
 }
 
+ul.progress_carrito li a{
+    color: inherit;
+    text-decoration: none;
+}
+
 ul.progress_carrito li:before {
     width: 30px;
     height: 30px;
