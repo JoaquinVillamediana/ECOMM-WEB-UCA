@@ -9,10 +9,11 @@
 }
 
 .main-container .images {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding:5%;
+    padding-left: 0px;
     width: 90%;
 }
+
 
 .main-container .images img {
     max-width: 100%;
@@ -20,6 +21,7 @@
 
 .main-container {
     padding-left: 20px;
+    padding-right: 20px;
     margin: 20px;
     background-color: rgb(224, 224, 224);
     border-radius: 10px;
@@ -104,15 +106,33 @@
     border: 1px solid #fff;
 }
 .main-container .btn-talle {
-    background-color: rgb(238, 232, 232);
     width:20%;
-    padding:10px;
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
 }
+
+.main-container .active, .btn-talle:hover {
+    background-color: #0e36c9;
+    color: white;
+  }
+
+.main-container .detalles ul {
+    padding: 8px;
+    padding-left: 20px;
+}
+
 
 @media screen and (max-width: 992px) {
     .main-container {
-        width:100%;
-        height:50%;
+        width:90%;
+        margin-left:5%;
+        margin-right:5%;
+        display: flex;
+        float:left;
         flex-direction: column;
     }
     .main-container .images {
@@ -128,6 +148,9 @@
 @media screen and (min-width: 992px) {
     .main-container{
         flex-direction: column;
+        margin: 20px;
+        padding-right: 20px;
+
     }
     .main-container .images {
         margin: 0 auto;

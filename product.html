@@ -8,6 +8,7 @@
     <title>E-Commerce</title>
     <link rel="stylesheet" href="./assets/css/general.css">
     <link rel="stylesheet" href="./assets/css/product.css">
+    <script src="./assets/js/product.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 
     <div class="main-container">
         <div class="images">
-            <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
+            <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="" class="slider-image">
         </div>
     </div>
     <div class="main-container">
@@ -33,12 +34,12 @@
         <p class="info-item"><b>ID Producto:</b> #342</p>
         <p class="info-item"><b>Color:</b> Azul</p>
 
-        <div class="botones">
-            <button class="btn-talle">XS</button>
-            <button class="btn-talle">S</button>
-            <button class="btn-talle">M</button>
-            <button class="btn-talle">L</button>
-            <button class="btn-talle">XL</button>
+        <div class="botones" id="talles">
+            <button class="btn-talle" onclick="btnseleccionado(0)">XS</button>
+            <button class="btn-talle" onclick="btnseleccionado(1)">S</button>
+            <button class="btn-talle" onclick="btnseleccionado(2)">M</button>
+            <button class="btn-talle" onclick="btnseleccionado(3)">L</button>
+            <button class="btn-talle" onclick="btnseleccionado(4)">XL</button>
         </div>
 
         <p class="price">$400.00</p>
@@ -48,7 +49,16 @@
             <a href="" class="btn-fav">favs</a>
         </div>
     </div>
-
+    <div class="main-container">
+        <div class="detalles">
+            <h4>DETALLES</h4>
+            <ul>
+                <li>Cámara de butilo</li>
+                <li>Exterior cosido a máquina</li>
+                <li>Es necesario inflarla</li>
+            </ul>
+        </div>
+    </div>
 
 
 
