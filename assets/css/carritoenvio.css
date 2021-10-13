@@ -101,3 +101,7 @@ ul.opciones_envio li label input{
     font-size: 15px;
     cursor: pointer;
 }
+
+.error{
+    border-color:rgb(250, 81, 81); 
+}

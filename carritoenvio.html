@@ -53,25 +53,25 @@
                 <div class="form-item">
                     <div class="textfield">
                         <label for="nombre">Nombre:</label>
-                        <input id="nombre" type="text" >
+                        <input id="nombre" type="text" onblur="validarNom(this.id)" >
                     </div>
                 </div>
                 <div class="form-item">
                     <div class="textfield">
                         <label for="direccion">Direccion:</label>
-                        <input id="direccion" type="text" >
+                        <input id="direccion" type="text" onblur="validarDirec(this.id)" >
                     </div>
                 </div>
                 <div class="form-item">
                     <div class="textfield">
                         <label for="telefono">Telefono:</label>
-                        <input id="telefono" type="text" >
+                        <input id="telefono" type="text" onblur="validarNum(this.id)" >
                     </div>
                 </div>
                 <div class="form-item">
                     <div class="textfield">
                         <label for="dni">DNI:</label>
-                        <input id="dni" type="text" >
+                        <input id="dni" type="text" onblur="validarNum(this.id)">
                     </div>
                 </div>
             </div>
