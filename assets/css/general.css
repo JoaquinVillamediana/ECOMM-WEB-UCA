@@ -68,6 +68,10 @@ header .container .links .link {
     margin-left: 10px;
 }
 
+.textfield-p-error{
+    color: red;
+}
+
 .textfield input:focus-visible, .textfield input:focus{
     transition: .5s linear 0s;
     border-color: #0633d5;
