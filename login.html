@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="./assets/css/general.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
+</head>
+
+<body>
+
+
+
+    <div class="container main-container">
+        <div class="box">
+            <h1>Login</h1>
+            <form action="">
+                <label for="">Email</label>
+                <input type="text" name="" id="email">
+
+                <label for="">Password</label>
+                <input type="password" name="" id="password">
+                <span id="error" class="error">Credenciales invalidas.</span>
+                <button type="submit" onclick="validateFields()">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+
+<script>
+    function validateFields() {
+        event.preventDefault();
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var errors = false;
+
+        if (!isEmail(email)) {
+            document.getElementById("email").style.cssText = 'border-color: red';
+            document.getElementById("error").style.cssText = "display: block";
+            errors = true;
+        } else {
+            document.getElementById("email").style.cssText = 'border: 1px solid #ced4da;';
+
+        }
+
+        if (password.length < 3) {
+            document.getElementById("password").style.cssText = 'border-color: red';
+            document.getElementById("error").style.cssText = "display: block";
+            errors = true;
+        } else {
+            document.getElementById("password").style.cssText = 'border: 1px solid #ced4da;';
+        }
+
+        if (!errors) {
+            window.location.href = "./adminproduct.html";
+        }
+    }
+
+    function isEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+</script>
+
+</html>

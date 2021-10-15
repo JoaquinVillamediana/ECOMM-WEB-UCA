@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="./assets/css/general_admin.css">
+    <link rel="stylesheet" href="./assets/css/adminproductcreate.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="./assets/img/logo.png" alt="" class="logo"> - Admin
+            </div>
+            <div class="links">
+                <a href="adminproduct.html" class="link">Productos</a>
+                <a href="" class="link">Categorias</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-container">
+        <h1>Crear Producto</h1>
+        <form action="">
+            <div class="item" id="name">
+                <label for="">Nombre</label>
+                <input type="text" name="name" id="name-input">
+            </div>
+            <div class="item" id="category">
+                <label for="">Categoria</label>
+                <select name="" id="category-input">
+                    <option value="">Futbol</option>
+                    <option value="">Tenis</option>
+                </select>
+            </div>
+            <div class="item" id="image">
+                <label for="">Imagen</label>
+                <input type="file" name="" id="image-input">
+            </div>
+            <div class="item" id="price">
+                <label for="">Precio</label>
+                <input type="number" name="" id="price-input">
+            </div>
+            <div class="item" id="details">
+                <label for="">Detalles</label>
+                <textarea name="" cols="30" id="details-input" rows="10"></textarea>
+            </div>
+            <div style="text-align: center;">
+                <button onclick="validateFields()" class="btn-create">Crear</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateFields() {
+            event.preventDefault();
+            var name = document.getElementById("name-input").value;
+            var price = document.getElementById("price-input").value;
+            var details = document.getElementById("details-input").textContent;
+
+
+
+            var errors = false;
+
+            if (name.length > 3 && name.length < 60) {
+                document.getElementById("name-input").style.cssText = 'border: 1px solid #ced4da;';
+            } else {
+                document.getElementById("name-input").style.cssText = 'border-color: red';
+                errors = true;
+            }
+
+            if (price != '') {
+                document.getElementById("price-input").style.cssText = 'border: 1px solid #ced4da;';
+            } else {
+                document.getElementById("price-input").style.cssText = 'border-color: red';
+                errors = true;
+            }
+
+            if (details.length > 3 && details.length < 60) {
+                document.getElementById("details-input").style.cssText = 'border: 1px solid #ced4da;';
+            } else {
+                document.getElementById("details-input").style.cssText = 'border-color: red';
+                errors = true;
+            }
+
+            if (!errors) {
+                window.location.href = "./index.html";
+            }
+        }
+
+        function isEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>
