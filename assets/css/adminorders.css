@@ -1,0 +1,16 @@
+
+
+.state.pending{
+  color: rgb(211, 207, 0);
+  font-weight: bold;
+}
+
+.state.success{
+  color: rgb(50, 212, 0);
+  font-weight: bold;
+}
+
+.state.cancel{
+  color: red;
+  font-weight: bold;
+}

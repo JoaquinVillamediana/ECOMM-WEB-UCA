@@ -40,6 +40,10 @@ header .container .links .link {
     margin: 0 5px;
 }
 
+header .container .links .link:hover{
+    border-bottom: 2px solid #0633d5;
+}
+
 .descrip {
     float: left;
 }
@@ -92,4 +96,16 @@ header .container .links .link {
 
 .textfield input.validated {
     border-color: green;
+}
+
+a.btn-admin{
+    text-decoration: none;
+    padding: 5px 15px;
+    background-color: #0633d5;
+    color: #fff;
+    border-radius: 5px;
+}
+
+a.btn-admin.red{
+    background-color: #d32f2f;
 }
