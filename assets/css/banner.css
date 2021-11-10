@@ -1,0 +1,44 @@
+section.info h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+section.info h2.title {
+    border-bottom: 2px solid #0e36c9;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+section.info .current-banner {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+section.info form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section.info form input {
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid rgba(14, 54, 201, .5);
+    padding: 5px;
+    border-radius: 2px;
+}
+
+section.info form button {
+    display: inline-block;
+    margin: 20px auto;
+    background-color: #0e36c9;
+    color: #fff;
+    padding: 5px 40px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}

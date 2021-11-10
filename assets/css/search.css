@@ -1,0 +1,144 @@
+section.products {
+    margin-bottom: 40px;
+}
+
+section.products h2.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+section.products .searcher {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+section.products .searcher .content {
+    display: flex;
+    flex-direction: column;
+}
+
+section.products .searcher button {
+    background-color: #0e36c9;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    padding: 7.5px 40px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+section.products .searcher input {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    font-size: 20px;
+    border: 1px solid rgba(171, 171, 171, 0.75);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+section.products .searcher select {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    font-size: 20px;
+    border: 1px solid rgba(171, 171, 171, 0.75);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+section.products .items {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+section.products .items .item {
+    min-width: 200px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 22%;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    box-shadow: -2px 5px 38px -13px rgba(171, 171, 171, 0.75);
+    -webkit-box-shadow: -2px 5px 38px -13px rgba(171, 171, 171, 0.75);
+    -moz-box-shadow: -2px 5px 38px -13px rgba(171, 171, 171, 0.75);
+}
+
+section.products .items .item .product-image {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+section.products .items .item .content {
+    padding: 10px;
+}
+
+section.products .items .item .content .category {
+    text-align: center;
+    font-weight: 300;
+}
+
+section.products .items .item .content h5.name {
+    text-align: center;
+    font-size: 24px;
+}
+
+section.products .items .item .content p.price {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    color: #0e36c9;
+}
+
+section.products .items .item .content .btn-buy {
+    background-color: #0e36c9;
+    color: #fff;
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all .1s ease;
+    border: 1px solid #fff;
+}
+
+section.products .items .item .content .btn-buy:hover {
+    background-color: #fff;
+    color: #0e36c9;
+    border: 1px solid #0e36c9;
+}
+
+section.products .items .item .content .btn-product {
+    background-color: #fff;
+    color: #0e36c9;
+    border: 1px solid #0e36c9;
+    display: block;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all .1s ease;
+}
+
+section.products .items .item .content .btn-product:hover {
+    background-color: #0e36c9;
+    color: #fff;
+    border: 1px solid #fff;
+}
