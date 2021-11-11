@@ -8,6 +8,7 @@
     <title>E-Commerce</title>
     <link rel="stylesheet" href="./assets/css/general.css">
     <link rel="stylesheet" href="./assets/css/carrito.css">
+    <link rel="stylesheet" href="./assets/css/carritopago.css">
 </head>
 
 <body>
@@ -25,9 +26,45 @@
             <a href="carritoenvio.html">Datos</a>
         </li>
         <li>
-            <a>Pago</a>
+            <a>Datos de pago</a>
         </li>
     </ul>
+    <main class="container carrito_resumen">
+        <section class="header b-bottom">
+            <h2 class="header">Datos de pago</h2>
+            <div class="form-group">
+                <div class="form-item">
+                    <div class="textfield">
+                        <label for="titular">Titular de la tarjeta</label>
+                        <input id="titular" type="text">
+                        <p class="textfield-p-error d-none" id="titular-error"></p>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <div class="textfield">
+                        <label for="tarjeta">Numero de la tarjeta</label>
+                        <input id="tarjeta" type="text" placeholder="1234-5987-4567-4569"">
+                        <p class="textfield-p-error d-none" id="tarjeta-error"></p>
+                    </div>
+                </div>
+                <div class="form-item dividido">
+                    <div class="textfield">
+                        <label for="date">Fecha de expiracion</label>
+                        <input id="date" type="date">
+                        <p class="textfield-p-error d-none" id="date-error"></p>
+                    </div>
+                    <div class="textfield">
+                        <label for="cvc">CVC</label>
+                        <input id="cvc" type="number" placeholder="123">
+                        <p class="textfield-p-error d-none" id="cvc-error"></p>
+                    </div>
+                </div>
+            </div>
+            <button class="proceder" onclick="confirmar()">Confirmar compra</button>
+
+        </section>
+    </main>
+    <script src="./assets/js/carritopago.js"></script>
 </body>
 
 </html>
