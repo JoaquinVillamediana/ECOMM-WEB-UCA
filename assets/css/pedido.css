@@ -1,40 +1,47 @@
-.div.cantidad p, .div.precio_item p {
+.div.cantidad p,
+.div.precio_item p {
     font-size: 28px;
+}
+
+main {
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
 }
 
 .cantidad {
     padding-bottom: 20px;
 }
 
-.resumen p{
+.resumen p {
     font-size: 25px;
     text-align: center;
     padding-bottom: 5px;
 }
 
-.resumen{
+.resumen {
     padding-bottom: 1.5em;
 }
 
-.envio, .productos{
+.envio,
+.productos {
     border-bottom: 0;
 }
 
-.productos{
+.productos {
     padding-bottom: 2em;
 }
 
-.envio .header{
+.envio .header {
     margin-bottom: 0;
 }
 
-.seleccionaste{
+.seleccionaste {
     text-align: center;
     margin-top: 20px;
     font-size: 30px;
 }
 
-.envio p{
+.envio p {
     font-size: 20px;
 }
 
@@ -42,12 +49,12 @@
     margin-bottom: 1em;
 }
 
-p.small{
+p.small {
     font-size: 18px;
     margin: 5px 0 0 0;
 }
 
-.info-envio{
+.info-envio {
     flex-wrap: wrap;
     display: flex;
     width: 50%;
@@ -55,57 +62,57 @@ p.small{
 }
 
 @media screen and (max-width: 600px) {
-    .info-envio{
+    .info-envio {
         width: 90%;
     }
 }
 
-.envio{
+.envio {
     padding-bottom: 2em;
 }
 
-.info-envio h3{
+.info-envio h3 {
     width: 100%;
     display: block;
     font-size: 30px;
     margin: .3em 0;
 }
 
-.info-envio .row{
+.info-envio .row {
     flex-direction: row;
     width: 100%;
 }
 
-.info-envio .row b, .info-envio .row p{
+.info-envio .row b,
+.info-envio .row p {
     display: inline;
 }
 
-
-.pago{
+.pago {
     margin-bottom: 2em;
     padding-bottom: 2em;
 }
 
-.red{
+.red {
     color: red;
     font-weight: bolder;
 }
 
-.yellow{
+.yellow {
     color: rgb(211, 207, 0);
     font-weight: bolder;
 }
 
-.green{
+.green {
     color: rgb(50, 212, 0);
     font-weight: bolder;
 }
 
-.pago .header{
+.pago .header {
     margin-bottom: 1em;
 }
 
-.pago .info-pago{
+.pago .info-pago {
     font-size: 23px;
     width: 50%;
     margin: 0 auto;

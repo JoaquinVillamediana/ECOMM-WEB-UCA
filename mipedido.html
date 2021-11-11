@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="./assets/css/general.css">
+    <link rel="stylesheet" href="./assets/css/mipedido.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <img src="./assets/img/logo.png" alt="" class="logo">
+            <div class="links">
+                <a href="index.html" class="link">Home</a>
+                <a href="" class="link">Categorias</a>
+                <a href="carrito.html" class="link">Carrito</a>
+                <a href="search.html" class="link">Buscador</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="search">
+        <h1>Estado de mi pedido</h1>
+        <form action="">
+            <label for="">Numero de pedido</label>
+            <input type="number" id="code" min="0" name="num">
+            <div style="text-align: center;">
+                <button onclick="validateFields()" class="btn-search">Buscar!</a>
+      </div>
+    </form>
+  </section>
+
+  <script>
+
+    function validateFields() {
+      event.preventDefault();
+      var num = document.getElementById("code").value;
+      var errors = false;
+
+      if (num == '' || num < 0) {
+        document.getElementById("code").style.cssText = 'border-color: red';
+        errors = true;
+      } else {
+        document.getElementById("code").style.cssText = 'border: 1px solid #ccc;';
+      }
+
+      if (!errors) {
+        window.location.href = "./pedido.html";
+      }
+    }
+
+  </script>
+
+
+</body>
+
+</html>
