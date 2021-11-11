@@ -30,6 +30,29 @@
     max-width: 100%;
 }
 
+.main-container form .current-images {
+    margin-top: 15px;
+}
+
+.main-container form .current-images ul {
+    margin-left: 25px;
+}
+
+.main-container form .current-images li {
+    margin-bottom: 5px;
+}
+
+.main-container form .current-images .del-img {
+    color: #000;
+    padding: 7.5px;
+    background-color: #ccc;
+    border-radius: 2.5px 5px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 2.5px;
+}
+
 .btn-create {
     background-color: #0e36c9;
     color: #fff;

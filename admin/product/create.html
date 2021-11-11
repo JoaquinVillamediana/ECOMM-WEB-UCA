@@ -28,7 +28,7 @@
 
     <div class="container main-container">
         <h1>Crear Producto</h1>
-        <form action="">
+        <form action="" id="productForm">
             <div class="item" id="name">
                 <label for="">Nombre</label>
                 <input type="text" name="name" id="name-input">
@@ -41,8 +41,12 @@
                 </select>
             </div>
             <div class="item" id="image">
-                <label for="">Imagen</label>
-                <input type="file" name="" id="image-input">
+                <label for="" id="images-label">Imagenes</label>
+                <input type="file" onchange="addImage(this)" name="image[]" id="img-1">
+                <div class="current-images">
+                    <ul id="ul-imgs">
+                    </ul>
+                </div>
             </div>
             <div class="item" id="price">
                 <label for="">Precio</label>
@@ -59,6 +63,36 @@
     </div>
 
     <script>
+        function addImage(object) {
+            object.style.cssText = 'display: none';
+
+            var img_id = object.id.split('-')[1];
+            var input = document.createElement("input");
+            var marker = document.createElement("li");
+            var img_name = object.value.split(/(\\|\/)/g).pop();
+            var img_list = document.getElementById("ul-imgs");
+
+            input.type = "file";
+            input.name = "image[]";
+            input.id = "img-" + (parseInt(img_id) + 1);
+            input.setAttribute("onchange", "addImage(this)");
+            object.parentNode.insertBefore(input, object.nextSibling);
+
+
+            marker.innerHTML = img_name + '<a href="" onclick="delImage(' + img_id + ')" id="del-img-' + img_id + '" class="del-img">X</a>';
+            img_list.append(marker);
+        }
+
+        function delImage(id) {
+            event.preventDefault();
+            var input = document.getElementById("img-" + id);
+            var marker = document.getElementById("del-img-" + id).parentNode;
+
+            marker.parentNode.removeChild(marker);
+            input.parentNode.removeChild(input);
+        }
+
+
         function validateFields() {
             event.preventDefault();
             var name = document.getElementById("name-input").value;
