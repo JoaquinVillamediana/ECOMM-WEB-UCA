@@ -1,0 +1,112 @@
+.div.cantidad p, .div.precio_item p {
+    font-size: 28px;
+}
+
+.cantidad {
+    padding-bottom: 20px;
+}
+
+.resumen p{
+    font-size: 25px;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.resumen{
+    padding-bottom: 1.5em;
+}
+
+.envio, .productos{
+    border-bottom: 0;
+}
+
+.productos{
+    padding-bottom: 2em;
+}
+
+.envio .header{
+    margin-bottom: 0;
+}
+
+.seleccionaste{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.envio p{
+    font-size: 20px;
+}
+
+.resumen .header {
+    margin-bottom: 1em;
+}
+
+p.small{
+    font-size: 18px;
+    margin: 5px 0 0 0;
+}
+
+.info-envio{
+    flex-wrap: wrap;
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+    .info-envio{
+        width: 90%;
+    }
+}
+
+.envio{
+    padding-bottom: 2em;
+}
+
+.info-envio h3{
+    width: 100%;
+    display: block;
+    font-size: 30px;
+    margin: .3em 0;
+}
+
+.info-envio .row{
+    flex-direction: row;
+    width: 100%;
+}
+
+.info-envio .row b, .info-envio .row p{
+    display: inline;
+}
+
+
+.pago{
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+}
+
+.red{
+    color: red;
+    font-weight: bolder;
+}
+
+.yellow{
+    color: rgb(211, 207, 0);
+    font-weight: bolder;
+}
+
+.green{
+    color: rgb(50, 212, 0);
+    font-weight: bolder;
+}
+
+.pago .header{
+    margin-bottom: 1em;
+}
+
+.pago .info-pago{
+    font-size: 23px;
+    width: 50%;
+    margin: 0 auto;
+}
