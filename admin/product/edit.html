@@ -27,37 +27,41 @@
     </header>
 
     <div class="container main-container">
-        <h1>Crear Producto</h1>
+        <h1>Editar Producto</h1>
         <form action="" id="productForm">
             <div class="item" id="name">
                 <label for="">Nombre</label>
-                <input type="text" name="name" id="name-input">
+                <input type="text" name="name" value="Pelota" id="name-input">
             </div>
             <div class="item" id="category">
                 <label for="">Categoria</label>
                 <select name="" id="category-input">
-                    <option value="">Futbol</option>
+                    <option selected value="">Futbol</option>
                     <option value="">Tenis</option>
                 </select>
             </div>
             <div class="item" id="image">
                 <label for="" id="images-label">Imagenes</label>
-                <input type="file" onchange="addImage(this)" name="image[]" id="img-1">
+                <input type="file" onchange="addImage(this)" name="image[]" id="img-4">
                 <div class="current-images">
                     <ul id="ul-imgs">
+                        <li>lorem.png<a href="" onclick="delImage(1)" id="del-img-1" class="del-img">X</a></li>
+                        <li>loremipsum.png<a href="" onclick="delImage(2)" id="del-img-2" class="del-img">X</a></li>
+                        <li>loremlorem.png<a href="" onclick="delImage(3)" id="del-img-3" class="del-img">X</a></li>
                     </ul>
                 </div>
             </div>
             <div class="item" id="price">
                 <label for="">Precio</label>
-                <input type="number" name="" id="price-input">
+                <input type="number" value="360" name="" id="price-input">
             </div>
             <div class="item" id="details">
                 <label for="">Detalles</label>
-                <textarea name="" cols="30" id="details-input" rows="10"></textarea>
+                <textarea name="" cols="30" id="details-input" rows="10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi possimus repudiandae deserunt voluptatum, laudantium delectus nihil, quos provident neque quas vero nisi ipsa, eligendi voluptate dolor saepe facere incidunt id?
+                </textarea>
             </div>
             <div style="text-align: center;">
-                <button onclick="validateFields()" class="btn-create">Crear</button>
+                <button onclick="validateFields()" class="btn-create">Guardar & Salir</button>
             </div>
         </form>
     </div>
