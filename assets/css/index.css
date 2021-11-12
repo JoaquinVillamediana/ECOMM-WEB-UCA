@@ -29,6 +29,7 @@ section.top-products .items .item {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     width: 22%;
+    position: relative;
     border: 1px solid #ccc;
     margin-bottom: 20px;
     box-shadow: -2px 5px 38px -13px rgba(171, 171, 171, 0.75);
@@ -42,6 +43,27 @@ section.top-products .items .item .product-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
+}
+
+section.top-products .items .item .discount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+section.top-products .items .item .price .old {
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+section.top-products .items .item .price .new {
+    color: #0e36c9;
+    font-weight: bold;
 }
 
 section.top-products .items .item .content {
@@ -105,4 +127,13 @@ section.top-products .items .item .content .btn-product:hover {
     background-color: #0e36c9;
     color: #fff;
     border: 1px solid #fff;
+}
+
+@media screen and (max-width: 992px) {
+    section.top-products .items {
+        justify-content: center !important;
+    }
+    section.top-products .items .item {
+        min-width: 250px !important;
+    }
 }

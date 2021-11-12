@@ -16,12 +16,14 @@
         <div class="container">
             <div class="logo-container">
                 <img src="../../assets/img/logo.png" alt="" class="logo"> - Admin
+                <img src="../../assets/svg/bars-solid.svg" width="25" class="bars" onclick="toggleHamburguesa()">
             </div>
             <div class="links">
                 <a href="../banner/index.html" class="link">Banner</a>
                 <a href="../product/index.html" class="link">Productos</a>
                 <a href="../category/index.html" class="link">Categorias</a>
                 <a href="../orders/index.html" class="link">Pedidos</a>
+                <a href="../../index.html" class="link logout">Log-Out</a>
             </div>
         </div>
     </header>
@@ -59,9 +61,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="item" id="price">
-                <label for="">Precio</label>
-                <input type="number" name="price" id="price-input">
+            <div class="price-combo">
+                <div class="item" id="price">
+                    <label for="">Precio (AR$)</label>
+                    <input type="number" name="price" id="price-input">
+                </div>
+                <div class="item" id="discount">
+                    <label for="">Descuento (%)</label>
+                    <input type="number" name="discount" id="discount-input">
+                </div>
             </div>
             <div class="item" id="stock">
                 <label for="">Stock</label>
@@ -153,6 +161,7 @@
             var price = document.getElementById("price-input").value;
             var details = document.getElementById("details-input");
             var stock = document.getElementById("stock-input").value;
+            var discount = document.getElementById("discount-input").value;
 
 
 
@@ -172,6 +181,13 @@
                 errors = true;
             }
 
+            if (parseInt(discount) >= 0 && parseInt(discount) < 100) {
+                document.getElementById("discount-input").style.cssText = 'border: 1px solid #ced4da;';
+            } else {
+                document.getElementById("discount-input").style.cssText = 'border-color: red';
+                errors = true;
+            }
+
             if (parseInt(stock) >= 0) {
                 document.getElementById("stock-input").style.cssText = 'border: 1px solid #ced4da;';
             } else {
@@ -179,7 +195,7 @@
                 errors = true;
             }
 
-            if (details.textLength > 3 && details.textLength < 255) {
+            if (details.textLength > 3 && details.textLength < 1050) {
                 document.getElementById("details-input").style.cssText = 'border: 1px solid #ced4da;';
             } else {
                 document.getElementById("details-input").style.cssText = 'border-color: red';
@@ -196,7 +212,7 @@
             return re.test(String(email).toLowerCase());
         }
     </script>
-
+    <script src="../../assets/js/generaladmin.js"></script>
 
 
 

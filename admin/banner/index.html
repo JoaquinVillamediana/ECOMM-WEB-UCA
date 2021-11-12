@@ -16,12 +16,14 @@
         <div class="container">
             <div class="logo-container">
                 <img src="../../assets/img/logo.png" alt="" class="logo"> - Admin
+                <img src="../../assets/svg/bars-solid.svg" width="25" class="bars" onclick="toggleHamburguesa()">
             </div>
             <div class="links">
                 <a href="../banner/index.html" class="link">Banner</a>
                 <a href="../product/index.html" class="link">Productos</a>
                 <a href="../category/index.html" class="link">Categorias</a>
                 <a href="../orders/index.html" class="link">Pedidos</a>
+                <a href="../../index.html" class="link logout">Log-Out</a>
             </div>
         </div>
     </header>
@@ -34,6 +36,8 @@
             <h2 class="title">Actualizar Banner</h2>
             <form action="">
                 <input class="" name="image" id="image" type="file">
+                <label for="">Enlace <i>Opcional</i></label>
+                <input type="text" name="link" minlength="3" maxlength="60">
                 <button type="button" onclick="validateInput()">Guardar</button>
             </form>
         </div>
@@ -43,7 +47,7 @@
 
 
 
-
+    <script src="../../assets/js/generaladmin.js"></script>
 </body>
 <script>
     function validateInput() {
@@ -63,5 +67,4 @@
         }
     }
 </script>
-
 </html>

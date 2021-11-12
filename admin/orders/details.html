@@ -17,12 +17,14 @@
         <div class="container">
             <div class="logo-container">
                 <img src="../../assets/img/logo.png" alt="" class="logo"> - Admin
+                <img src="../../assets/svg/bars-solid.svg" width="25" class="bars" onclick="toggleHamburguesa()">
             </div>
             <div class="links">
                 <a href="../banner/index.html" class="link">Banner</a>
                 <a href="../product/index.html" class="link">Productos</a>
                 <a href="../category/index.html" class="link">Categorias</a>
                 <a href="../orders/index.html" class="link">Pedidos</a>
+                <a href="../../index.html" class="link logout">Log-Out</a>
             </div>
         </div>
     </header>
@@ -31,10 +33,19 @@
         <form action="" id="productForm">
             <h1 class="text-center my-1">Revisar orden #123</h1>
             <div class="estado">
-                <p >Estado del pedido: </p> <span class="state pending" id="pendiente">Pendiente</span> <br>
+                <p>Estado del pedido: </p> <span class="state pending" id="pendiente">Pendiente</span> <br>
                 <div id="botones">
                     <button type="button" class="btn btn-success" onclick="confirmar()">Confirmar</button>
                     <button type="button" class="btn btn-cancel" onclick="rechazar()">Rechazar</button>
+                </div>
+                <div id="modal" class="modal">
+                    <div class="contenido">
+                        <p>Seguro que desea <span id="texto-modal">rechazar</span> este pedido?</p>
+                        <div class="botones">
+                            <button type="button" class="btn btn-success" onclick="confirmarAccion()">Si</button>
+                            <button type="button" class="btn btn-cancel" onclick="cancelarAccion()">No</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <h2 class="prod">Productos</h2>
@@ -76,7 +87,7 @@
             </ul>
             <div class="section envio">
                 <h2 class="header">Datos de envio</h2>
-                <p class="seleccionaste">Seleccionó:    <b>Envio a domicilio</b></p>
+                <p class="seleccionaste">Seleccionó: <b>Envio a domicilio</b></p>
                 <div class="info-envio">
                     <h3>Datos de envio:</h3>
                     <div class="row">
@@ -110,10 +121,11 @@
                     </div>
                 </div>
             </div>
-            
+
         </form>
     </div>
     <script src="/assets/js/adminordersdetails.js"></script>
+    <script src="../../assets/js/generaladmin.js"></script>
 </body>
 
 </html>

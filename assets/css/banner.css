@@ -21,14 +21,20 @@ section.info form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 20px;
 }
 
 section.info form input {
     width: 100%;
-    margin-top: 20px;
+    margin-bottom: 20px;
     border: 1px solid rgba(14, 54, 201, .5);
     padding: 5px;
     border-radius: 2px;
+}
+
+section.info form label i {
+    color: rgb(167, 167, 167);
+    font-size: 14px;
 }
 
 section.info form button {
