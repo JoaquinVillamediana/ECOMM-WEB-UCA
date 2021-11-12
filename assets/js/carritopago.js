@@ -15,18 +15,12 @@ function sonLetras(str){
 
 function sonNumeros(str){
     // acepta tambien el  / de fecha de expiracion y el - del numero de la tarjeta
-    var x = 0
     for (let i of str){
-        if ((i.charCodeAt(0)>57 || i.charCodeAt(0)<48) && (i=="-" || i=="/")){
-            x+=1
+        if (!((i.charCodeAt(0)>=48 && i.charCodeAt(0)<=57) || i=="-" || i=="/")){
+            return false
         }
     }
-    if (x>0){
-        return false
-    }
-    else if (x===0){
-        return true
-    }
+    return true
 }
 
 function validarInput(id, validacion, mensajeError){
@@ -97,7 +91,7 @@ function validarNom(miID,mensajeError){
 function validarNumTarjeta(miID,mensajeError){
     var x = document.getElementById(miID)
     var ok = false
-    if (x.value != "" && sonNumeros(x.value) && x.value.length==16){
+    if (x.value != "" && sonNumeros(x.value) && x.value.length==16+3){
         ok =  true
     }
     else {
