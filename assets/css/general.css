@@ -112,3 +112,47 @@ footer .link {
         margin: 5px 0;
     }
 }
+.bars{
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    div.imgs {
+        max-width: 95%;
+        display: flex;
+    }
+    header .container {
+        display: block;
+    }
+    .bars {
+        display: inline;
+        margin-left: auto;
+    }
+    .links {
+        display: none;
+        width: 100%;
+    }
+    .links.visible {
+        width: 100%;
+        display: block;
+    }
+    .links a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+    }
+    .links a:last-child {
+        border-bottom: none;
+        border-left: none;
+    }
+    header .container .links .link.logout {
+        border-left: none;
+        margin-left: 0;
+    }
+    .mobile-scroll {
+        overflow-x: scroll;
+    }
+}
