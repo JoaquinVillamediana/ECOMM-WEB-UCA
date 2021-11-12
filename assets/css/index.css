@@ -128,3 +128,12 @@ section.top-products .items .item .content .btn-product:hover {
     color: #fff;
     border: 1px solid #fff;
 }
+
+@media screen and (max-width: 992px) {
+    section.top-products .items {
+        justify-content: center !important;
+    }
+    section.top-products .items .item {
+        min-width: 250px !important;
+    }
+}
