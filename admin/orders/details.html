@@ -37,6 +37,15 @@
                     <button type="button" class="btn btn-success" onclick="confirmar()">Confirmar</button>
                     <button type="button" class="btn btn-cancel" onclick="rechazar()">Rechazar</button>
                 </div>
+                <div id="modal" class="modal">
+                    <div class="contenido">
+                        <p>Seguro que desea <span id="texto-modal">rechazar</span> este pedido?</p>
+                        <div class="botones">
+                            <button type="button" class="btn btn-success" onclick="confirmarAccion()">Si</button>
+                            <button type="button" class="btn btn-cancel" onclick="cancelarAccion()">No</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <h2 class="prod">Productos</h2>
             <ul class="carrito_productos">
