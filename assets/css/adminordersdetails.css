@@ -1,0 +1,97 @@
+form {
+    width: 100%;
+    max-width: 900px;
+    margin: 23px auto;
+    font-size: 20px;
+}
+
+h2.header{
+    font-size: 25px;
+}
+
+.prod{
+    margin-left: 1.3em;
+    margin-bottom: .5em;
+}
+
+.section.envio h2.header, .section.pago .header{
+    margin-bottom: .2em;
+}
+
+.seleccionaste{
+    margin-top: 1em;
+}
+
+.section{
+    border: 0;
+    margin-left: 0;
+    padding: 0 2em;
+}
+
+.section h3{
+    margin-bottom: .5em;
+}
+
+div.info-envio{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+div.section.pago .header{
+    margin-bottom: 1em;
+}
+
+div.section{
+}
+
+div.datos-tarjeta{
+    padding: .5em 2em;
+}
+
+.estado{
+    margin-left: 2em;
+}
+
+.estado p{
+    display: inline;
+}
+
+.btn{
+    display: inline-block;
+    font-size: 23px;
+    padding: .35em .6em;
+    margin: .5em;
+    box-shadow: none;
+    border-radius: 10px;
+    color: #ecf0f1;
+    border: 1px solid white;
+}
+
+btn:hover{
+    color: #ecf0f1;
+}
+
+.btn.btn-success{
+    transition: 1s;
+    background-color: #2ecc71;
+}
+
+.btn.btn-success:hover{
+    transition: 1s;
+    background-color: #16a085;
+}
+
+
+.btn.btn-cancel{
+    transition: 1s;
+    background-color: #e74c3c;
+}
+
+.btn.btn-cancel:hover{
+    transition: 1s;
+    background-color: #c0392b;
+}
+
+.state.pending{
+    color: #f1c40f;
+}

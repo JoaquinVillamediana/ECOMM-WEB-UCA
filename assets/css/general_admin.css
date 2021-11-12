@@ -6,6 +6,18 @@
     font-family: 'Raleway', sans-serif;
 }
 
+.text-center{
+    text-align: center;
+}
+
+.my-1{
+    margin: 1em 0;
+}
+
+.d-none{
+    display: none;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -15,6 +27,22 @@ header {
     background-color: #343a40;
     padding: 10px 0;
 }
+
+
+.state.pending{
+    color: rgb(211, 207, 0);
+    font-weight: bold;
+  }
+  
+  .state.success{
+    color: rgb(50, 212, 0);
+    font-weight: bold;
+  }
+  
+  .state.cancel{
+    color: red;
+    font-weight: bold;
+  }
 
 header .logo-container {
     color: #fff;
