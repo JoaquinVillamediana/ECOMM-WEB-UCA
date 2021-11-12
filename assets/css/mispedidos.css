@@ -1,39 +1,72 @@
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 
-.styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    width: 100%;
+.container.orders {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container.orders .item {
+    display: block;
+    width: 30%;
+    background-color: #dddddd;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    padding: 20px;
+    position: relative;
+    margin: 10px 0;
+    min-width: 300px;
 }
 
-.styled-table thead tr {
-    background-color: #0e36c9;
-    color: #ffffff;
-    text-align: left;
-}
-
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #0e36c9;
-}
-
-.styled-table tbody tr:hover {
+.container.orders .item h5.order {
+    font-size: 32px;
     font-weight: bold;
-    color: #0e36c9;
+}
+
+.container.orders .item .date {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.container.orders .item .status {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+}
+
+.container.orders .item .status.pending {
+    color: rgb(196, 196, 4);
+    font-weight: bold;
+}
+
+.container.orders .item .status.cancel {
+    color: red;
+    font-weight: bold;
+}
+
+.container.orders .item .status.approve {
+    color: green;
+    font-weight: bold;
+}
+
+.container.orders .item .address {
+    margin-top: 10px;
+}
+
+.container.orders .item .more {
+    background-color: #0633d5;
+    color: #fff;
+    padding: 5px 20px;
+    display: inline-block;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
 }
 
 a.btn-admin {
@@ -42,4 +75,10 @@ a.btn-admin {
     background-color: #0633d5;
     color: #fff;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 932px) {
+    .container.orders {
+        justify-content: center;
+    }
 }
