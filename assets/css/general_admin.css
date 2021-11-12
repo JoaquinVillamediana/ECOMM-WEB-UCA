@@ -84,12 +84,6 @@ header .container .links .link.logout:hover {
     float: left;
 }
 
-@media screen and (max-width: 992px) {
-    .container {
-        max-width: 95%;
-    }
-}
-
 .mb-1 {
     margin-bottom: 2em;
 }
@@ -146,30 +140,29 @@ a.btn-admin.red {
     background-color: #d32f2f;
 }
 
-.bars{
+.bars {
     display: none;
 }
 
 @media screen and (max-width: 992px) {
-    header .container{
+    .container {
+        max-width: 95%;
+    }
+    header .container {
         display: block;
     }
-
-    .bars{
+    .bars {
         display: block;
         margin-left: auto;
     }
-
-    .links{
+    .links {
         display: none;
         width: 100%;
     }
-
-    .links.visible{
+    .links.visible {
         display: block;
     }
-
-    .links a{
+    .links a {
         display: block;
         width: 100%;
         text-align: center;
@@ -177,9 +170,15 @@ a.btn-admin.red {
         border-top: 1px solid white;
         border-bottom: 1px solid white;
     }
-    .links a:last-child{
+    .links a:last-child {
         border-bottom: none;
         border-left: none;
     }
-
+    header .container .links .link.logout {
+        border-left: none;
+        margin-left: 0;
+    }
+    .mobile-scroll {
+        overflow-x: scroll;
+    }
 }

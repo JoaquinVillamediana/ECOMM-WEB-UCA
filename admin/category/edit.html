@@ -34,6 +34,7 @@
             <div class="item" id="name">
                 <label for="">Nombre</label>
                 <input type="text" name="name" value="Futbol" id="name-input">
+                <span class="error">Campo obligatorio (min 3 car. max 60 car.)</span>
             </div>
             <div style="text-align: center;">
                 <button onclick="validateFields()" class="btn-create">Guardar</button>
@@ -41,29 +42,7 @@
         </form>
     </div>
 
-    <script>
-        function validateFields() {
-            event.preventDefault();
-            var name = document.getElementById("name-input").value;
-
-            var errors = false;
-
-            if (name.length > 3 && name.length < 60) {
-                document.getElementById("name-input").style.cssText = 'border: 1px solid #ced4da;';
-            } else {
-                document.getElementById("name-input").style.cssText = 'border-color: red';
-                errors = true;
-            }
-
-            if (!errors) {
-                window.location.href = "./index.html";
-            }
-        }
-    </script>
-
-
-
-
+    <script src="../../assets/js/admincategory.js"></script>
     <script src="../../assets/js/generaladmin.js"></script>
 </body>
 
