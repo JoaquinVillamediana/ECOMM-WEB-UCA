@@ -61,12 +61,6 @@ p.small {
     margin: 0 auto;
 }
 
-@media screen and (max-width: 600px) {
-    .info-envio {
-        width: 90%;
-    }
-}
-
 .envio {
     padding-bottom: 2em;
 }
@@ -116,4 +110,39 @@ p.small {
     font-size: 23px;
     width: 50%;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 932px) {
+    .info-envio {
+        width: 90%;
+    }
+    .resumen .header {
+        font-size: 20px;
+    }
+    main p.small {
+        font-size: 15px;
+    }
+    section.b-bottom,
+    .section .header {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .carrito_productos li {
+        flex-direction: column;
+        align-items: center;
+    }
+    div.info {
+        flex-direction: column;
+        text-align: center;
+    }
+    .info-envio h3 {
+        font-size: 24px;
+    }
+    .envio p {
+        font-size: 16px;
+    }
+    .pago .info-pago {
+        width: 90%;
+        font-size: 18px;
+    }
 }
