@@ -100,6 +100,17 @@
     /* width: 20px; */
 }
 
+.main-container .price-combo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container .price-combo .item#price {
+    width: 80%;
+}
+
 .btn-create {
     background-color: #0e36c9;
     color: #fff;
