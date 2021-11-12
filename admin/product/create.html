@@ -48,6 +48,17 @@
                     </ul>
                 </div>
             </div>
+            <div class="item attrs" id="image">
+                <label for="" id="images-label">Atributos</label>
+                <div class="combo" id="attr-combo">
+                    <input type="text" name="attrs" id="attr-input" data-attr-id="1">
+                    <a href="" onclick="addAttr()" class="attr-submit">Cargar</a>
+                </div>
+                <div class="current-attrs">
+                    <ul id="ul-attr">
+                    </ul>
+                </div>
+            </div>
             <div class="item" id="price">
                 <label for="">Precio</label>
                 <input type="number" name="" id="price-input">
@@ -63,6 +74,45 @@
     </div>
 
     <script>
+        function addAttr() {
+            event.preventDefault();
+            var name = document.getElementById("attr-input").value;
+
+            if (name.length < 1) {
+                document.getElementById("attr-input").style.cssText = 'border-color: red';
+            } else {
+                document.getElementById("attr-input").style.cssText = 'border: 1px solid #ced4da;';
+                var input = document.createElement("input");
+                var attr_id = document.getElementById("attr-input").getAttribute('data-attr-id');
+
+                input.type = "hidden";
+                input.name = "attr[]";
+                input.id = "attr-" + (parseInt(attr_id));
+                input.value = name;
+
+                document.getElementById("attr-combo").append(input);
+
+                var marker = document.createElement("li");
+                var attr_list = document.getElementById("ul-attr");
+
+                marker.innerHTML = name + '<a href="" onclick="delAttr(' + attr_id + ')" id="del-attr-' + attr_id + '" class="del-attr">X</a>';
+                attr_list.append(marker);
+
+                document.getElementById("attr-input").value = "";
+                document.getElementById("attr-input").setAttribute('data-attr-id', parseInt(attr_id) + 1);
+            }
+
+        }
+
+        function delAttr(id) {
+            event.preventDefault();
+            var input = document.getElementById("attr-" + id);
+            var marker = document.getElementById("del-attr-" + id).parentNode;
+
+            marker.parentNode.removeChild(marker);
+            input.parentNode.removeChild(input);
+        }
+
         function addImage(object) {
             object.style.cssText = 'display: none';
 
