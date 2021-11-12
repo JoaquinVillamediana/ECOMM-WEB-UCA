@@ -111,6 +111,14 @@
     width: 80%;
 }
 
+.main-container .error {
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
 .btn-create {
     background-color: #0e36c9;
     color: #fff;

@@ -33,6 +33,7 @@
             <div class="item" id="name">
                 <label for="">Nombre</label>
                 <input type="text" name="name" id="name-input">
+                <span class="error">Campo obligatorio (min 3 car. max 60 car.)</span>
             </div>
             <div class="item" id="category">
                 <label for="">Categoria</label>
@@ -64,19 +65,23 @@
                 <div class="item" id="price">
                     <label for="">Precio (AR$)</label>
                     <input type="number" name="price" id="price-input">
+                    <span class="error">Campo obligatorio. Numerico</span>
                 </div>
                 <div class="item" id="discount">
                     <label for="">Descuento (%)</label>
                     <input type="number" name="discount" id="discount-input">
+                    <span class="error">Campo obligatorio.</span>
                 </div>
             </div>
             <div class="item" id="stock">
                 <label for="">Stock</label>
                 <input type="number" min="0" name="stock" id="stock-input">
+                <span class="error">Campo obligatorio. Numerico</span>
             </div>
             <div class="item" id="details">
                 <label for="">Detalles</label>
                 <textarea name="" cols="30" id="details-input" rows="10"></textarea>
+                <span class="error">Campo obligatorio. (min 3 car. max 1050 car.)</span>
             </div>
             <div style="text-align: center;">
                 <button onclick="validateFields()" class="btn-create">Crear</button>
@@ -168,36 +173,46 @@
 
             if (name.length > 3 && name.length < 60) {
                 document.getElementById("name-input").style.cssText = 'border: 1px solid #ced4da;';
+                document.querySelector("#name .error").style.cssText = 'display: none;';
             } else {
                 document.getElementById("name-input").style.cssText = 'border-color: red';
+                document.querySelector("#name .error").style.cssText = 'display: block;';
                 errors = true;
             }
 
             if (price != '') {
                 document.getElementById("price-input").style.cssText = 'border: 1px solid #ced4da;';
+                document.querySelector("#price .error").style.cssText = 'display: none;';
             } else {
                 document.getElementById("price-input").style.cssText = 'border-color: red';
+                document.querySelector("#price .error").style.cssText = 'display: block;';
                 errors = true;
             }
 
             if (parseInt(discount) >= 0 && parseInt(discount) < 100) {
                 document.getElementById("discount-input").style.cssText = 'border: 1px solid #ced4da;';
+                document.querySelector("#discount .error").style.cssText = 'display: none;';
             } else {
                 document.getElementById("discount-input").style.cssText = 'border-color: red';
+                document.querySelector("#discount .error").style.cssText = 'display: block;';
                 errors = true;
             }
 
             if (parseInt(stock) >= 0) {
                 document.getElementById("stock-input").style.cssText = 'border: 1px solid #ced4da;';
+                document.querySelector("#stock .error").style.cssText = 'display: none;';
             } else {
                 document.getElementById("stock-input").style.cssText = 'border-color: red';
+                document.querySelector("#stock .error").style.cssText = 'display: block;';
                 errors = true;
             }
 
             if (details.textLength > 3 && details.textLength < 1050) {
                 document.getElementById("details-input").style.cssText = 'border: 1px solid #ced4da;';
+                document.querySelector("#details .error").style.cssText = 'display: none;';
             } else {
                 document.getElementById("details-input").style.cssText = 'border-color: red';
+                document.querySelector("#details .error").style.cssText = 'display: block;';
                 errors = true;
             }
 
