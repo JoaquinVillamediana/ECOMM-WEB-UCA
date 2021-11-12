@@ -14,9 +14,10 @@ function sonLetras(str){
 }
 
 function sonNumeros(str){
+    // acepta tambien el  / de fecha de expiracion y el - del numero de la tarjeta
     var x = 0
     for (let i of str){
-        if ((i.charCodeAt(0)>57 || i.charCodeAt(0)<48)){
+        if ((i.charCodeAt(0)>57 || i.charCodeAt(0)<48) && (i=="-" || i=="/")){
             x+=1
         }
     }
@@ -68,10 +69,10 @@ function confirmar(){
 }
 
 function validarInputs(){
-    var nom = validarNom("titular","Este campo no debe estar vacío.")
-    var tarj = validarNumTarjeta("tarjeta","Este campo no debe estar vacío.")
+    var nom = validarNom("titular","Este campo no debe estar vacío y debe contener sólo letras.")
+    var tarj = validarNumTarjeta("tarjeta","Este campo no debe estar vacío y debe contener sólo números.")
     var fech = validarFechaExp("date","Este campo no debe estar vacío.")
-    var cvc = validarCVC("cvc","Este campo no debe estar vacío.")
+    var cvc = validarCVC("cvc","Este campo no debe estar vacío y debe contener sólo números.")
     if (nom && tarj && fech && cvc){
         return true
     }else {
@@ -109,8 +110,8 @@ function validarNumTarjeta(miID,mensajeError){
 function validarFechaExp(miID,mensajeError){
     var x = document.getElementById(miID)
     var ok = false
-    if (x.value != "" && x.value == 5){
-        ok =  true
+    if (x.value != "" && x.value.length == 5){
+        ok = true
     }
     else {
         mostrarErrorInput(miID,mensajeError)
@@ -122,7 +123,7 @@ function validarFechaExp(miID,mensajeError){
 function validarCVC(miID,mensajeError){
     var x = document.getElementById(miID)
     var ok = false
-    if (x.value != "" && x.value == 3 && sonNumeros(x.value)){
+    if (x.value != "" && x.value.length == 3 && sonNumeros(x.value)){
         ok =  true
     }
     else {
