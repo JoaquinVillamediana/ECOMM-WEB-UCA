@@ -67,7 +67,11 @@
             </div>
             <div class="item" id="price">
                 <label for="">Precio</label>
-                <input type="number" value="360" name="" id="price-input">
+                <input type="number" value="360" name="price" id="price-input">
+            </div>
+            <div class="item" id="stock">
+                <label for="">Stock</label>
+                <input type="number" min="0" name="stock" value="23" id="stock-input">
             </div>
             <div class="item" id="details">
                 <label for="">Detalles</label>
@@ -155,7 +159,7 @@
             var name = document.getElementById("name-input").value;
             var price = document.getElementById("price-input").value;
             var details = document.getElementById("details-input");
-
+            var stock = document.getElementById("stock-input").value;
 
 
             var errors = false;
@@ -173,6 +177,14 @@
                 document.getElementById("price-input").style.cssText = 'border-color: red';
                 errors = true;
             }
+
+            if (parseInt(stock) >= 0) {
+                document.getElementById("stock-input").style.cssText = 'border: 1px solid #ced4da;';
+            } else {
+                document.getElementById("stock-input").style.cssText = 'border-color: red';
+                errors = true;
+            }
+
             if (details.textLength > 3 && details.textLength < 255) {
                 document.getElementById("details-input").style.cssText = 'border: 1px solid #ced4da;';
             } else {
