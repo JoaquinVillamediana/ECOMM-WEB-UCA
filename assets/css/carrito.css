@@ -1,4 +1,5 @@
 /* Progress carrito */
+
 ul.progress_carrito {
     counter-reset: step;
     padding-top: 2em;
@@ -10,7 +11,7 @@ ul.progress_carrito {
     align-items: flex-start;
 }
 
-ul.progress_carrito li{
+ul.progress_carrito li {
     flex-direction: column;
     display: block;
     width: calc(100% / 3);
@@ -20,7 +21,7 @@ ul.progress_carrito li{
     position: relative;
 }
 
-ul.progress_carrito li a{
+ul.progress_carrito li a {
     color: inherit;
     text-decoration: none;
 }
@@ -38,6 +39,7 @@ ul.progress_carrito li:before {
     border-radius: 50%;
     background-color: white;
 }
+
 ul.progress_carrito li:after {
     width: 100%;
     height: 10px;
@@ -52,31 +54,40 @@ ul.progress_carrito li:after {
 ul.progress_carrito li:first-child:after {
     content: none;
 }
+
 ul.progress_carrito li.done {
     color: #0e36c9;
 }
+
 ul.progress_carrito li.done:before {
     content: "";
     background-color: #0e36c9;
     border-color: #0e36c9;
     background-image: url('../svg/check.svg');
 }
-ul.progress_carrito li.done + li:after {
+
+ul.progress_carrito li.done+li:after {
     background-color: #0e36c9;
 }
+
+
 /* resumen carrito */
-.carrito_resumen{
+
+.carrito_resumen {
     border: 1px solid #c6c6c6;
     border-radius: 2%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.carrito_resumen h2{
+.carrito_resumen h2 {
     text-align: center;
     margin: .5em 0;
 }
+
+
 /* carrito productos */
-.carrito_productos{
+
+.carrito_productos {
     margin: 0 2em;
     display: flex;
     flex-direction: column;
@@ -99,26 +110,34 @@ ul.progress_carrito li.done + li:after {
     border-bottom: 1px solid #c6c6c6;
 }
 
+
 /* IMG */
-.carrito_productos li img{
+
+.carrito_productos li img {
     width: 100px;
     height: 100px;
 }
+
 @media screen and (max-width: 992px) {
-    .carrito_productos li img{
+    .carrito_productos li img {
         width: 80px;
         height: 80px;
     }
 }
+
+
 /* Info */
-.info{
+
+.info {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
+
 /* Descripcion */
-.carrito_productos div.descripcion{
+
+.carrito_productos div.descripcion {
     padding: 0 1em;
     flex-direction: column;
     margin: 0;
@@ -131,27 +150,40 @@ div.descripcion * {
     display: block;
     height: fit-content;
 }
+
+
 /* ID */
-div.descripcion .id{
-    font-size: 14px;
-}
-/* Titulo */
-div.descripcion h3{
-    font-size: 21px;
-    text-transform: uppercase;
-}
-@media screen and (max-width: 992px) {
-    div.descripcion h3{
-        font-size: 13px;
-    }
-}
-/* tags */
-div.descripcion .tags{
+
+div.descripcion .id {
     font-size: 14px;
 }
 
+
+/* Titulo */
+
+div.descripcion h3 {
+    font-size: 21px;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 992px) {
+    div.descripcion h3 {
+        font-size: 13px;
+    }
+}
+
+
+/* tags */
+
+div.descripcion .tags {
+    font-size: 14px;
+}
+
+
 /* Cantidad */
-.carrito_productos div.cantidad, .carrito_productos div.precio_item {
+
+.carrito_productos div.cantidad,
+.carrito_productos div.precio_item {
     width: 25%;
     height: 100%;
     display: inline-block;
@@ -159,21 +191,27 @@ div.descripcion .tags{
     display: flex;
     justify-content: center;
 }
+
 @media screen and (max-width: 500px) {
-    .carrito_productos div.cantidad{
+    .carrito_productos div.cantidad {
         display: none;
     }
 }
+
 .carrito_productos div.cantidad {
     flex-direction: column;
 }
+
+
 /* Precio item */
-.precio_item{
+
+.precio_item {
     align-items: center;
-    font-weight:500;
+    font-weight: 500;
     font-size: 1.5em;
 }
-.eliminar{
+
+.eliminar {
     padding: .5em 1em;
     margin-left: .5em;
     border: 0;
@@ -184,42 +222,48 @@ div.descripcion .tags{
     cursor: pointer;
 }
 
+
 /* Subtotal */
 
-.precios span{
+.precios span {
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.cantidades{
+.cantidades {
     margin-right: 50px;
     font-weight: bold;
     text-transform: uppercase;
 }
-.cantidades p{
+
+.cantidades p {
     text-transform: lowercase;
     font-weight: 50;
     font-style: italic;
 }
 
 @media screen and (max-width: 700px) {
-    .cantidades{
+    .cantidades {
         margin-right: 10px;
     }
 }
+
+
 /* Botones */
-.btn{
+
+.btn {
     display: block;
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.subtotal{
+
+.subtotal {
     display: flex;
     justify-content: space-between;
     margin: 2em 2em 2em;
 }
 
-.subtotal a{
+.subtotal a {
     font-size: 1em;
     font-weight: bold;
     padding: 1em 1.5em;
@@ -227,83 +271,87 @@ div.descripcion .tags{
     cursor: pointer;
 }
 
-.info{
+.info {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.secondary{
+.secondary {
     background: #efefef;
     color: black;
 }
 
-.primary{
+.primary {
     background-color: #0e36c9;
     color: white;
 }
+
 @media screen and (max-width: 600px) {
-    .subtotal a{
+    .subtotal a {
         font-size: .9em;
         padding: 1em 1em;
     }
-    div.info{
+    div.info {
         font-size: .9em;
     }
 }
+
 @media screen and (max-width: 450px) {
-    div.info{
+    div.info {
         font-size: .6em;
     }
 }
 
-section, .section{
+section,
+.section {
     border: 1px solid #b3b0b0;
     margin: 0 2em;
 }
 
-section.header, .section.header{
+section.header,
+.section.header {
     margin-top: 2em;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom: none;
 }
 
-section h2.header, .section .header{
+section h2.header,
+.section .header {
     border-bottom: 1px solid #b3b0b0;
     margin-top: 0;
     margin-bottom: 0;
     padding: .5em 0;
 }
 
-section.b-bottom, .section .header{
+section.b-bottom,
+.section .header {
     border-bottom: 1px solid #b3b0b0;
     margin-bottom: 2em;
 }
 
-
-.form-group{
+.form-group {
     margin-top: 2em;
 }
 
-.resumen p{
+.resumen p {
     font-size: 15px;
 }
 
-.form-item{
+.form-item {
     margin: 1em auto;
     max-width: 500px;
 }
 
-
 @media screen and (max-width: 600px) {
-    .form-item{
+    .form-item {
         width: 90%;
         margin: .5em auto;
     }
 }
 
-.proceder{
+.proceder {
     margin: 2em auto;
     padding: 1em 1em;
     border: 0;
@@ -316,7 +364,7 @@ section.b-bottom, .section .header{
     cursor: pointer;
 }
 
-.form-item.dividido .textfield{
+.form-item.dividido .textfield {
     display: inline-block;
     width: 49%;
 }

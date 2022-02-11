@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!empty($_SESSION["user"])) {
+    header('Location: index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,10 +26,15 @@
                 <img src="assets/svg/bars-solid.svg" width="25" class="bars" onclick="toggleHamburguesa()">
             </div>
             <div class="links">
-                <a href="index.html" class="link">Home</a>
-                <a href="carrito.html" class="link">Carrito</a>
-                <a href="search.html" class="link">Buscador</a>
-                <a href="login.html" class="link logout">Ingresar</a>
+                <a href="index.php" class="link">Home</a>
+                <a href="search.php" class="link">Buscador</a>
+                <?php if (!empty($_SESSION['user'])) { ?>
+                    <a href="carrito.php" class="link">Carrito</a>
+                    <a href="mispedidos.php" class="link">Mis Pedidos</a>
+                    <a href="logout.php" class="link logout">Salir</a>
+                <?php } else { ?>
+                    <a href="login.php" class="link logout">Ingresar</a>
+                <?php } ?>
             </div>
         </div>
     </header>
@@ -55,7 +67,7 @@
                     <span class="error">Las contraseñas deben coincidir.</span>
                 </div>
 
-                <a class="register" href="login.html">Ya tenes cuenta? Ingresa!</a>
+                <a class="register" href="login.php">Ya tenes cuenta? Ingresa!</a>
                 <button type="submit" onclick="validateFields()">Registrarse</button>
             </form>
         </div>
