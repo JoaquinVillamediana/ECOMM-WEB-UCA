@@ -1,8 +1,5 @@
 <?php
-session_start();
-if (!empty($_SESSION["user"])) {
-    header('Location: index.php');
-}
+include_once('onlyguest.php');
 ?>
 
 <!DOCTYPE html>

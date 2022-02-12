@@ -1,3 +1,7 @@
+<?php
+include_once('../../onlyadmin.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,71 +23,65 @@
                 <img src="../../assets/svg/bars-solid.svg" width="25" class="bars" onclick="toggleHamburguesa()">
             </div>
             <div class="links">
-                <a href="../banner/index.html" class="link">Banner</a>
-                <a href="../users/index.html" class="link">Usuarios</a>
-                <a href="../product/index.html" class="link">Productos</a>
-                <a href="../category/index.html" class="link">Categorias</a>
-                <a href="../orders/index.html" class="link">Pedidos</a>
-                <a href="../../index.html" class="link logout">Log-Out</a>
+                <a href="../banner/index.php" class="link">Banner</a>
+                <a href="../users/index.php" class="link">Usuarios</a>
+                <a href="../product/index.php" class="link">Productos</a>
+                <a href="../category/index.php" class="link">Categorias</a>
+                <a href="../orders/index.php" class="link">Pedidos</a>
+                <a href="../../logout.php" class="link logout">Log-Out</a>
             </div>
         </div>
     </header>
 
     <section class="list">
         <div class="container">
-            <h1>Usuarios</h1>
+            <h1>Productos</h1>
+            <a href="create.html" class="btn-create">Crear</a>
             <div class="mobile-scroll">
                 <table class="styled-table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Tipo</th>
-                            <th>Fecha registro</th>
+                            <th>Categoria</th>
+                            <th>Precio</th>
                             <th></th>
-
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Juancito gomez</td>
-                            <td>juangomezdeboca@gmail.com</td>
-                            <td>Cliente</td>
-                            <td>14/08/2021</td>
+                            <td>Pelota adidas NX47</td>
+                            <td>Pelotas</td>
+                            <td>$1500</td>
+                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
                             <td><a href="" class="btn-admin red">Eliminar</a></td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>Enzo Perez</td>
-                            <td>ezito01@gmail.com</td>
-                            <td>Admin</td>
-                            <td>11/08/2021</td>
+                            <td>Camiseta seleccion colombia</td>
+                            <td>Remeras</td>
+                            <td>$1100</td>
+                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
                             <td><a href="" class="btn-admin red">Eliminar</a></td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>Carlos Juarez</td>
-                            <td>carlosjuarex@gmail.com</td>
-                            <td>Cliente</td>
-                            <td>05/02/2021</td>
+                            <td>Short seleccion argentina</td>
+                            <td>Pantalones</td>
+                            <td>$4500</td>
+                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
                             <td><a href="" class="btn-admin red">Eliminar</a></td>
                         </tr>
                         <tr>
-                            <td>4</td>
-                            <td>Marcos Desire</td>
-                            <td>marcos032@gmail.com</td>
-                            <td>Cliente</td>
-                            <td>25/12/2021</td>
+                            <td>Pelota adidas NX47</td>
+                            <td>Pelotas</td>
+                            <td>$1500</td>
+                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
                             <td><a href="" class="btn-admin red">Eliminar</a></td>
                         </tr>
                         <tr>
-                            <td>5</td>
-                            <td>Pedro Surco</td>
-                            <td>pepes@gmail.com</td>
-                            <td>Cliente</td>
-                            <td>12/05/2021</td>
+                            <td>Pelota adidas NX47</td>
+                            <td>Pelotas</td>
+                            <td>$1500</td>
+                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
                             <td><a href="" class="btn-admin red">Eliminar</a></td>
                         </tr>
                         <!-- and so on... -->

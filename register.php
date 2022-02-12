@@ -1,9 +1,8 @@
 <?php
-session_start();
-if (!empty($_SESSION["user"])) {
-    header('Location: index.php');
-}
+include_once('db.php');
+include_once('onlyguest.php');
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +41,7 @@ if (!empty($_SESSION["user"])) {
     <div class="container main-container">
         <div class="box">
             <h1>Registro</h1>
-            <form action="">
+            <form action="" method="POST" id="registerForm">
                 <div id="name">
                     <label for="">Nombre y apellido</label>
                     <input type="text" name="name">
@@ -53,6 +52,29 @@ if (!empty($_SESSION["user"])) {
                     <label for="">Email</label>
                     <input type="email" name="email">
                     <span class="error">Email invalido.</span>
+
+                    <?php
+                    include_once('db.php');
+
+                    if ($_POST) {
+                        $conn = conectarBD();
+                        $query = 'SELECT * FROM usuarios WHERE email = "' . $_POST["email"] . '";';
+                        $respuesta = consultaSQL($conn, $query);
+
+                        if ($respuesta->num_rows > 0) {
+                            echo ('<span style="display:block;" class="error">Este email ya se encuentra registrado.</span>');
+                            desconectarBD($conn);
+                        } else {
+                            $query = 'INSERT INTO usuarios (email,password,nombre,usertype) VALUES ("' . $_POST["email"] . '","' . $_POST["password"] . '","' . $_POST["name"] . '",2)';
+                            consultaSQL($conn, $query);
+                            desconectarBD($conn);
+                            $_SESSION['user'] = $_POST['email'];
+                            $_SESSION['user_type'] = 2;
+                            header('Location: index.php');
+                        }
+                    }
+                    ?>
+
                 </div>
 
                 <div id="password">

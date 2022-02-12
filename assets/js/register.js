@@ -46,7 +46,7 @@ function validateFields() {
     }
 
     if (!errors) {
-        window.location.href = "./index.html";
+        document.getElementById('registerForm').submit();
     }
 }
 

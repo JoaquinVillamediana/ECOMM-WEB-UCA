@@ -1,3 +1,7 @@
+<?php
+include_once('../../onlyadmin.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,12 +24,12 @@
                 <img src="../../assets/svg/bars-solid.svg" width="25" class="bars" onclick="toggleHamburguesa()">
             </div>
             <div class="links">
-                <a href="../banner/index.html" class="link">Banner</a>
-                <a href="../users/index.html" class="link">Usuarios</a>
-                <a href="../product/index.html" class="link">Productos</a>
-                <a href="../category/index.html" class="link">Categorias</a>
-                <a href="../orders/index.html" class="link">Pedidos</a>
-                <a href="../../index.html" class="link logout">Log-Out</a>
+                <a href="../banner/index.php" class="link">Banner</a>
+                <a href="../users/index.php" class="link">Usuarios</a>
+                <a href="../product/index.php" class="link">Productos</a>
+                <a href="../category/index.php" class="link">Categorias</a>
+                <a href="../orders/index.php" class="link">Pedidos</a>
+                <a href="../../logout.php" class="link logout">Log-Out</a>
             </div>
         </div>
     </header>
