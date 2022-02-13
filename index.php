@@ -34,24 +34,31 @@ session_start();
                 <?php 
                     include('db.php');
                     $conn = conectarBD();
-                    $query = 'select * from producto';
+                    $query = 'SELECT categoria.nombre as nom_cat, producto.nombre as nom_prod, producto.precio as precio, producto.id as id, 
+                    producto_imagenes.imagen as url_img, producto.descuento as descuento from producto 
+                    INNER JOIN categoria ON producto.id_categoria=categoria.id
+                    INNER JOIN producto_imagenes ON producto.id=producto_imagenes.id_producto 
+                    WHERE descuento IS NOT NULL';;
                     $result = consultaSQL($conn,$query);
+                    $id="";
                     while ($producto = $result->fetch_assoc()){
-                        if ($producto['descuento'] != NULL){
-                            ?>
-                                <div class="item">
-                                    <img class="product-image" src="./assets/img/remera-futbol-hombre-adidas-visitante-colombia-a-fi5295-4.jpg" alt="">
-                                    <div class="content">
-                                        <p class="category">Camisetas</p>
-                                        <h5 class="name"><?php echo $producto['nombre']?></h5>
-                                        <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['descuento']?></span></p>
-                                        <a href="product.php" class="btn-product">Ver producto</a>
-                                    </div>
-                                    <div class="discount">30% OFF</div>
+                        if ($producto['id']!=$id){
+                            $porcentaje = (($producto['precio']-$producto['descuento'])*100)/$producto['precio'];
+                        ?>
+                            <div class="item">
+                                <img class="product-image" src=<?php echo $producto['url_img'] ?> alt="">
+                                <div class="content">
+                                    <p class="category"><?php echo $producto['nom_cat']?></p>
+                                    <h5 class="name"><?php echo $producto['nom_prod']?></h5>
+                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['descuento']?></span></p>
+                                    <a href="product.php" class="btn-product">Ver producto</a>
                                 </div>
+                                <div class="discount"><?php echo intval($porcentaje)?>% OFF!</div>
+                            </div>
 
-                        <?php }
-                    } ?>
+                    <?php $id = $producto['id'];
+                            }
+                        } ?>
             </div>
 
         </div>
