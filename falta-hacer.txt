@@ -1,0 +1,2 @@
+- ver configuraciones adicionales del admin, por ejemplo: configurar cantidad de productos que se muestren en la home
+- configurar la cantidad de producto que se compra en product.php y poder cambiarlo tambien desde el carrito.php

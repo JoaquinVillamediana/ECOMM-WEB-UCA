@@ -1,4 +1,7 @@
-function btnseleccionado(x) {
+var id_atributo_elegido, id_producto, cantidad = 1;
+
+function btnseleccionado(x, _id_atributo) {
+    id_atributo_elegido = _id_atributo
     var header = document.getElementById("talles")
     var act = header.getElementsByClassName("active")
     var len = act.length
@@ -24,4 +27,24 @@ function dotselect(x) {
     }
     var btns = header.getElementsByClassName("dot")
     btns[(x - 1)].classList.add("dot-active")
+}
+
+function agregarProducto(){
+    var data = new FormData();
+    data.append("id_producto", id_producto);
+    data.append("id_atributo", id_atributo_elegido);
+    data.append("cantidad", cantidad);
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log(this.responseText);
+        }
+    });
+
+    xhr.open("POST", "carrito.php");
+
+    xhr.send(data);
 }

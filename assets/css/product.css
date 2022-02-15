@@ -81,6 +81,7 @@
 }
 
 .main-container .btn-carrito {
+    cursor: pointer;
     background-color: #0e36c9;
     color: #fff;
     display: inline-block;
