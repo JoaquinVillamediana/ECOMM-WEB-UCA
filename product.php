@@ -20,45 +20,66 @@ session_start();
 <body>
 
     <?php include('template/navbar.php');?>
+    <?php 
+        if(!$_GET || !$_GET["id"]){
+            header("Location: index.php");
+        }
+        include('db.php');
+        $id_producto = $_GET["id"];
+        $conn = conectarBD();
+        $query = "SELECT producto.*, categoria.nombre as nombre_categoria FROM producto JOIN categoria ON producto.id_categoria = categoria.id WHERE producto.id = $id_producto";
+        $result = consultaSQL($conn,$query);
+        $producto = $result->fetch_assoc();
+        if($producto){
+            $query = "SELECT imagen FROM producto_imagenes WHERE id_producto = $id_producto";
+            $result = consultaSQL($conn,$query);
+            $imagenes = [];
+            while($imagen = $result->fetch_assoc()){
+                $imagenes[] = $imagen["imagen"];
+            }
+            // dejo las imagenes en javascript para que despues se puedan cambiar del lado del cliente
+            echo ('<script>var imagenes = '. json_encode($imagenes) .'</script>');
+            
+            echo('
+            <div class="main-container">
+                <div class="images">
+                    <img id="images" src="'.$imagenes[0].'" alt="" class="slider-image">
+                </div>
+                <div id="dots" class="btns-img">');
+                foreach (range(0, count($imagenes) - 1) as $numero) {
+                    $dot_active = $numero == 0 ? " dot-active" : "";
+                    echo('<span class="dot' . $dot_active . '" onclick="currentSlide(' . strval($numero + 1) . ')"></span>');
+                }
+            echo('</div>
+            </div>
+            <div class="main-container">
+                <p class="category">'.$producto["nombre_categoria"].'</p>
+                <h1 class="name">'.$producto["nombre"].'</h1>
+                <p class="info-item"><b>ID Producto:</b> #'.$producto["id"].'</p>
+                <div class="botones" id="talles">
+                    <button class="btn-talle active" onclick="btnseleccionado(0)">Azul</button>
+                    <button class="btn-talle" onclick="btnseleccionado(1)">Arg</button>
+                    <button class="btn-talle" onclick="btnseleccionado(2)">Blanca</button>
+                </div>
+                <p class="price">$ '.number_format($producto["precio"], 2).' </p>
 
-    <div class="main-container">
-        <div class="images">
-            <img id="images" src="assets/img/pelota1.jpeg" alt="" class="slider-image">
-        </div>
-        <div id="dots" class="btns-img">
-            <span class="dot dot-active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-    </div>
-    <div class="main-container">
-        <p class="category">Pelotas</p>
-        <h1 class="name">Pelota Turquesa FH7347</h1>
-        <p class="info-item"><b>ID Producto:</b> #342</p>
+                <div class="botones">
+                    <a href="carrito.html" class="btn-carrito">AGREGAR AL CARRITO</a>
+                </div>
 
-        <div class="botones" id="talles">
-            <button class="btn-talle active" onclick="btnseleccionado(0)">Azul</button>
-            <button class="btn-talle" onclick="btnseleccionado(1)">Arg</button>
-            <button class="btn-talle" onclick="btnseleccionado(2)">Blanca</button>
-
-        </div>
-
-        <p class="price">$400.00</p>
-
-        <div class="botones">
-            <a href="carrito.html" class="btn-carrito">AGREGAR AL CARRITO</a>
-        </div>
-
-    </div>
-    <div class="main-container">
-        <div class="detalles">
-            <h4>DETALLES</h4>
-            <p>Pelota de Fútbol futsal GOL DE ORO STAR | Nº4 Material: cuero sintetico vulcanizado Color:naranja, blanco, amarillo peso reglamentario: 400gr Tamaño:nº4 gajos pegados tipo de pique: medio pique circunferencia: 65 cm</p>
-        </div>
-    </div>
-
-    
-
+            </div>
+            <div class="main-container">
+                <div class="detalles">
+                    <h4>DETALLES</h4>
+                    <p>'.$producto["detalles"].'</p>
+                </div>
+            </div>
+            ');
+        }
+        else{
+            header("Location: index.php");
+        }
+    ?>
     <script src="./assets/js/generalfront.js"></script>
 
 </body>

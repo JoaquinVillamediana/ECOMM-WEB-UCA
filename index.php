@@ -2,8 +2,6 @@
 session_start();
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +49,7 @@ session_start();
                                     <p class="category"><?php echo $producto['nom_cat']?></p>
                                     <h5 class="name"><?php echo $producto['nom_prod']?></h5>
                                     <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['descuento']?></span></p>
-                                    <a href="product.php" class="btn-product">Ver producto</a>
+                                    <a href="product.php?id=<?php echo strval($producto["id"]) ?>" class="btn-product">Ver producto</a>
                                 </div>
                                 <div class="discount"><?php echo intval($porcentaje)?>% OFF!</div>
                             </div>
@@ -65,74 +63,31 @@ session_start();
     </section>
     <section class="top-products">
         <div class="container">
-            <h2 class="title">Productos destacados</h2>
+            <h2 class="title">Productos</h2>
 
             <div class="items">
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price"><span class="old">$400.00</span> <span class="new">$280.00</span></p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                    <div class="discount">30% OFF</div>
-                </div>
-
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price">$400.00</p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price">$400.00</p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price">$400.00</p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price">$400.00</p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price">$400.00</p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="product-image" src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="content">
-                        <p class="category">Pelotas</p>
-                        <h5 class="name">Pelota adidas ADX40</h5>
-                        <p class="price">$400.00</p>
-                        <a href="product.php" class="btn-product">Ver producto</a>
-                    </div>
-                </div>
+                <?php 
+                    $conn = conectarBD();
+                    $query = 'SELECT producto.*, categoria.nombre as nombre_categoria FROM producto JOIN categoria ON producto.id_categoria = categoria.id LIMIT 12';
+                    $result = consultaSQL($conn,$query);
+                    while ($producto = mysqli_fetch_assoc($result)){
+                        $id_producto = $producto["id"];
+                        $query = "SELECT imagen FROM producto_imagenes WHERE id_producto = $id_producto LIMIT 1";
+                        $result_img = consultaSQL($conn,$query);
+                        $imagen = $result_img->fetch_assoc();
+                        echo('
+                        <div class="item">
+                                <img class="product-image" src="' . $imagen["imagen"] . '" alt="">
+                                <div class="content">
+                                    <p class="category">' . $producto["nombre_categoria"] . '</p>
+                                    <h5 class="name">' . $producto["nombre"] . '</h5>
+                                    <p class="price"><span class="new">$ '. number_format($producto["precio"], 2) .'</span></p>
+                                    <a href="product.php?id='. $producto["id"] .'" class="btn-product">Ver producto</a>
+                                </div>
+                            </div>
+                        ');
+                    }
+                ?>
 
             </div>
 

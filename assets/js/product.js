@@ -12,13 +12,7 @@ function btnseleccionado(x) {
 function currentSlide(x) {
     var current = document.getElementById("images")
     dotselect(x)
-    if (x === 1) {
-        current.src = "assets/img/pelota1.jpeg"
-    } else if (x === 2) {
-        current.src = "assets/img/pelota2.jpeg"
-    } else if (x === 3) {
-        current.src = "assets/img/pelota3.jpeg"
-    }
+    current.src = imagenes[x-1]
 }
 
 function dotselect(x) {
