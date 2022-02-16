@@ -152,9 +152,9 @@ CREATE TABLE IF NOT EXISTS `pedidos_producto` (
   PRIMARY KEY (`id`),
   KEY `id_producto` (`id_producto`),
   KEY `id_pedido` (`id_pedido`),
-  KEY `id_atributo` (`id_atributo`),
+  KEY `pedidos_atributos_idx` (`id_atributo`),
+  CONSTRAINT `pedidos_atributos` FOREIGN KEY (`id_atributo`) REFERENCES `producto_atributo` (`id`),
   CONSTRAINT `pedidos_producto_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
-  CONSTRAINT `pedidos_producto_ibfk_2` FOREIGN KEY (`id_atributo`) REFERENCES `producto_atributo` (`id_producto`),
   CONSTRAINT `pedidos_producto_ibfk_3` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
