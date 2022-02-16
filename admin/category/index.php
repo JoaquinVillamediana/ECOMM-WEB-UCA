@@ -1,8 +1,19 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+
+if ($_POST && !empty($_POST['category_id'])) {
+    $conn = conectarBD();
+    $query = 'DELETE FROM categoria WHERE id = ' . $_POST['category_id'] . ';';
+    consultaSQL($conn, $query);
+    desconectarBD($conn);
+}
+
+
+
 ?>
 
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -36,7 +47,7 @@ include_once('../../onlyadmin.php');
     <section class="list">
         <div class="container">
             <h1>Categorias</h1>
-            <a href="create.html" class="btn-create">Crear</a>
+            <a href="create.php" class="btn-create">Crear</a>
             <div class="mobile-scroll">
                 <table class="styled-table">
                     <thead>
@@ -48,25 +59,27 @@ include_once('../../onlyadmin.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Pelotas</td>
-                            <td><a href="edit.html" class="btn-admin">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Remeras</td>
-                            <td><a href="edit.html" class="btn-admin">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Pantalones</td>
-                            <td><a href="edit.html" class="btn-admin">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <!-- and so on... -->
+                        <?php
+
+                        $conn = conectarBD();
+                        $query = 'SELECT * FROM categoria';
+                        $respuesta = consultaSQL($conn, $query);
+
+                        if ($respuesta->num_rows > 0) {
+                            while ($row = $respuesta->fetch_assoc()) {
+                                echo ('<tr>
+                                <td>' . $row["id"] . '</td>
+                                <td>' . $row["nombre"] . '</td>
+                                <td><a href="edit.php?id='. $row["id"] .'" class="btn-admin">Editar</a></td>
+                                <td><form action="" method="POST">
+                                <input type="hidden" name="category_id" value="' . $row["id"] . '">
+                                <button type="submit" class="btn-admin red">Eliminar</button></form></td>
+                                </tr>');
+                            }
+                        }
+                        desconectarBD($conn);
+
+                        ?>
                     </tbody>
                 </table>
             </div>

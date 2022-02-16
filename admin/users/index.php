@@ -83,8 +83,6 @@ if ($_POST && !empty($_POST['user_id'])) {
                                 <button type="submit" class="btn-admin red">Eliminar</button></form></td>
                                 </tr>');
                             }
-                        } else {
-                            // echo ('<span style="display:block;" class="error">Credenciales invalidas.</span>');
                         }
                         desconectarBD($conn);
 

@@ -1,5 +1,28 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+
+$conn = conectarBD();
+$query = 'SELECT * FROM categoria WHERE id = "' . $_GET['id'] . '";';
+$respuesta = consultaSQL($conn, $query);
+if ($respuesta->num_rows > 0) {
+    while ($row = $respuesta->fetch_assoc()) {
+        $current_name = $row["nombre"];
+    }
+    desconectarBD($conn);
+} else {
+    desconectarBD($conn);
+    header("Location: index.php");
+}
+
+
+if ($_POST) {
+    $conn = conectarBD();
+    $query = 'UPDATE categoria SET nombre = "'. $_POST["name"] .'" WHERE id = "' . $_GET['id'] . '";';
+    consultaSQL($conn, $query);
+    desconectarBD($conn);
+    header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +58,10 @@ include_once('../../onlyadmin.php');
 
     <div class="container main-container">
         <h1>Editar Categoria</h1>
-        <form action="">
+        <form action="" method="POST" id="createForm">
             <div class="item" id="name">
                 <label for="">Nombre</label>
-                <input type="text" name="name" value="Pelotas" id="name-input">
+                <input type="text" name="name" value="<?php echo($current_name); ?>" id="name-input">
                 <span class="error">Campo obligatorio (min 3 car. max 60 car.)</span>
             </div>
             <div style="text-align: center;">

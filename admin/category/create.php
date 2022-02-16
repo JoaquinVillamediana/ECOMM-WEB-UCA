@@ -1,5 +1,14 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+
+if ($_POST) {
+    $conn = conectarBD();
+    $query = 'INSERT INTO categoria (nombre) VALUES ("' . $_POST['name'] . '");';
+    consultaSQL($conn, $query);
+    desconectarBD($conn);
+    header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +44,7 @@ include_once('../../onlyadmin.php');
 
     <div class="container main-container">
         <h1>Crear Categoria</h1>
-        <form action="">
+        <form action="" method="POST" id="createForm">
             <div class="item" id="name">
                 <label for="">Nombre</label>
                 <input type="text" name="name" id="name-input">
