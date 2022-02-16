@@ -67,9 +67,10 @@ include_once('onlyguest.php');
                         } else {
                             $query = 'INSERT INTO usuarios (email,password,nombre,usertype) VALUES ("' . $_POST["email"] . '","' . $_POST["password"] . '","' . $_POST["name"] . '",2)';
                             consultaSQL($conn, $query);
-                            desconectarBD($conn);
                             $_SESSION['user'] = $_POST['email'];
+                            $_SESSION["userid"] = $conn->insert_id;
                             $_SESSION['user_type'] = 2;
+                            desconectarBD($conn);
                             header('Location: index.php');
                         }
                     }

@@ -17,7 +17,7 @@
         <div class="container">
             <img src="./assets/img/logo.png" alt="" class="logo">
             <div class="links">
-                <a href="index.html" class="link">Volver al sitio</a>
+                <a href="index.php" class="link">Volver al sitio</a>
             </div>
         </div>
     </header>

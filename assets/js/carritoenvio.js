@@ -1,5 +1,7 @@
 let sectionSeleccionar = document.querySelector("#seleccionar")
 let sectionDatos = document.querySelector("#datos")
+let form = document.querySelector("#form")
+
 
 let optRetiro = document.querySelector("#retiro")
 let optEnvio = document.querySelector("#envio")
@@ -7,7 +9,10 @@ let optEnvio = document.querySelector("#envio")
 let datosTitulo = document.querySelector("#datos_titulo")
 let opcion="";
 
+let input_envio = document.querySelector("#input_envio")
+
 function seleccionar(opt){
+    input_envio.value = opt === "envio" ? 1 : 0
     limpiarInputs()
     optEnvio.checked = false
     optRetiro.checked = false
@@ -41,7 +46,7 @@ function proceder(){
         ok = false
 
     if(ok)
-        window.location.href = "carritopago.html"
+        form.submit()
 }
 
 function mostrarErrorInput(id, mensajeError){
