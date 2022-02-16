@@ -1,5 +1,13 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+
+if ($_POST && !empty($_POST['product_id'])) {
+    $conn = conectarBD();
+    $query = 'DELETE FROM producto WHERE id = ' . $_POST['product_id'] . ';';
+    consultaSQL($conn, $query);
+    desconectarBD($conn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +44,7 @@ include_once('../../onlyadmin.php');
     <section class="list">
         <div class="container">
             <h1>Productos</h1>
-            <a href="create.html" class="btn-create">Crear</a>
+            <a href="create.php" class="btn-create">Crear</a>
             <div class="mobile-scroll">
                 <table class="styled-table">
                     <thead>
@@ -49,42 +57,30 @@ include_once('../../onlyadmin.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Pelota adidas NX47</td>
-                            <td>Pelotas</td>
-                            <td>$1500</td>
-                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Camiseta seleccion colombia</td>
-                            <td>Remeras</td>
-                            <td>$1100</td>
-                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Short seleccion argentina</td>
-                            <td>Pantalones</td>
-                            <td>$4500</td>
-                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Pelota adidas NX47</td>
-                            <td>Pelotas</td>
-                            <td>$1500</td>
-                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Pelota adidas NX47</td>
-                            <td>Pelotas</td>
-                            <td>$1500</td>
-                            <td><a href="edit.html" class="btn-admin blue">Editar</a></td>
-                            <td><a href="" class="btn-admin red">Eliminar</a></td>
-                        </tr>
-                        <!-- and so on... -->
+                        <?php 
+                        
+                        $conn = conectarBD();
+                        $query = 'SELECT producto.id as id, producto.nombre as nombre, categoria.nombre as nom_cat, producto.precio as precio from producto
+                        INNER JOIN categoria ON producto.id_categoria=categoria.id';
+                        $respuesta = consultaSQL($conn,$query);
+
+                        if ($respuesta->num_rows > 0);{
+                            while ($row = $respuesta->fetch_assoc()){
+                                ?>
+                                <tr>
+                                    <td><?php echo $row['nombre'] ?></td>
+                                    <td><?php echo $row['nom_cat'] ?></td>
+                                    <td><?php echo "$".$row['precio'] ?></td>
+                                    <td><form action="" method="POST">
+                                        <input type="hidden" name="product_id" value=<?php echo $row['id'];?>>
+                                        <a href="edit.php?product_id=<?php echo $row['id'] ?>" class="btn-admin blue">Editar</a>
+                                        <button type="submit" class="btn-admin red">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php }
+                        } ?>
+                        
                     </tbody>
                 </table>
             </div>

@@ -1,5 +1,17 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+
+$id_cat=$_POST['category_input'];
+$nombre=$_POST['name_input'];
+$precio=$_POST['price-input'];
+$detalles=$_POST['details-input'];
+$stock=$_POST['stock-input'];
+$descuento=$_POST['discount-input'];
+
+$query = 'INSERT INTO product values ('.$id_cat.','.$nombre.','.$precio.','.$detalles.','.$descuento.','.$stock.')'
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +47,7 @@ include_once('../../onlyadmin.php');
 
     <div class="container main-container">
         <h1>Crear Producto</h1>
-        <form action="" id="productForm">
+        <form action="" method="POST" id="productForm">
             <div class="item" id="name">
                 <label for="">Nombre</label>
                 <input type="text" name="name" id="name-input">
@@ -44,8 +56,16 @@ include_once('../../onlyadmin.php');
             <div class="item" id="category">
                 <label for="">Categoria</label>
                 <select name="" id="category-input">
-                    <option value="">Futbol</option>
-                    <option value="">Tenis</option>
+                <?php 
+                $conn = conectarBD();
+                $query = "select * from categoria";
+                $resultado = consultaSQL($conn,$query);
+                if ($resultado->num_rows >0){
+                    while ($row = $resultado->fetch_assoc()){
+                        ?>
+                        <option value=<?php echo $row['id']?>><?php echo $row['nombre']?></option>
+                    <?php }
+                } ?>
                 </select>
             </div>
             <div class="item" id="image">
@@ -90,7 +110,7 @@ include_once('../../onlyadmin.php');
                 <span class="error">Campo obligatorio. (min 3 car. max 1050 car.)</span>
             </div>
             <div style="text-align: center;">
-                <button onclick="validateFields()" class="btn-create">Crear</button>
+                <button type="submit" onclick="validateFields()" class="btn-create">Crear</button>
             </div>
         </form>
     </div>

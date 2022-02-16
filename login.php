@@ -62,7 +62,7 @@ include_once('onlyguest.php');
                             desconectarBD($conn);
 
                             if ($_SESSION['user_type'] == 1) {
-                                header('Location: ./admin/banner/index.html');
+                                header('Location: ./admin/banner/index.php');
                             } else {
                                 header('Location: index.php');
                             }
