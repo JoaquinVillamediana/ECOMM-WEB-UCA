@@ -1,3 +1,7 @@
+<?php
+    include_once("onlyclientes.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,84 +27,104 @@
     </header>
     <main class="container carrito_resumen">
         <section class="b-bottom header" id="seleccionar">
-            <h2 class="header">Resumen del pedido #421</h2>
-            <div class="resumen section header">
-                <h2 class="header">Gracias por comprar en nuestra tienda</h2>
-                <p>Tu numero de pedido es: 421</p>
-                <p class="small">Durante las proximas horas te estaremos contactando via mail para actualizarte el estado del pedido</p>
-                <p class="small">Estado del pedido: <span class="yellow">pendiente</span></p>
-            </div>
-            <div class="resumen section productos">
-                <h2 class="header">Productos:</h2>
-                <ul class="carrito_productos">
-                    <li>
-                        <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                        <div class="info">
-                            <div class="descripcion">
-                                <p class="id">#123</p>
-                                <h3>Titulo del producto</h3>
-                                <p class="tags">Color: azul</p>
-                            </div>
-                            <div class="cantidad">
-                                <p>Precio unit.: $1500.00</p>
-                                <p>Cantidad: 5</p>
-                            </div>
-                            <div class="precio_item">
-                                $1500.00
-                            </div>
+            <?php 
+                include_once("db.php");
+                $conn = conectarBD();
+                // Traigo el pedido seleccionado
+                $id_pedido = $_GET["id"];
+                $query = "SELECT pedidos.*, estados.nombre as estado_nombre
+                          FROM pedidos 
+                          JOIN estados ON estados.id = pedidos.id_estado
+                          WHERE pedidos.id = $id_pedido";
+                $result = consultaSQL($conn, $query);
+                $pedido = $result->fetch_assoc();
+                if($pedido && $pedido["id_usuario"] == $_SESSION["userid"]){
+                    $seleccionaste = $pedido["envio"] == 1 ? "Envio a domicilio" : "Retiro en local";
+                    // Traigo los pedidos_productos
+                    $query = "SELECT pedidos_producto.*, producto.nombre as producto_nombre, producto_atributo.nombre as atributo_nombre , (SELECT imagen FROM producto_imagenes WHERE producto_imagenes.id_producto = pedidos_producto.id_producto LIMIT 1) as producto_imagen
+                              FROM pedidos_producto
+                              JOIN producto ON producto.id = pedidos_producto.id_producto
+                              JOIN  producto_atributo ON pedidos_producto.id_atributo = producto_atributo.id
+                              WHERE id_pedido = $id_pedido";
+                    $result = consultaSQL($conn, $query);
+                    $pedido_productos = [];
+                    while($pp = $result->fetch_assoc()){
+                        $pedido_productos[] = $pp;
+                    }
+                }
+                else{
+                    // No existe el pedido o es de un cliente distinto al logueado
+                    header("location: index.php");                   
+                }
+            
+            ?>
+                <h2 class="header">Resumen del pedido #<?php echo $_GET["id"]; ?></h2>
+                <div class="resumen section header">
+                    <h2 class="header">Gracias por comprar en nuestra tienda</h2>
+                    <p>Tu numero de pedido es: <?php echo $_GET["id"]; ?></p>
+                    <p class="small">Durante las proximas horas te estaremos contactando via mail para actualizarte el estado del pedido</p>
+                    <p class="small">Estado del pedido: <span class="yellow"><?php echo $pedido["estado_nombre"] ?></span></p>
+                </div>
+                <div class="resumen section productos">
+                    <h2 class="header">Productos:</h2>
+                    <ul class="carrito_productos">
+                        <?php
+                        foreach ($pedido_productos as $pp) {
+                            echo('
+                                <li>
+                                <img src="'.$pp["producto_imagen"].'" alt="">
+                                <div class="info">
+                                    <div class="descripcion">
+                                        <p class="id">#'.$pp["id_producto"].'</p>
+                                        <h3>'.$pp["producto_nombre"].'</h3>
+                                        <p class="tags">'.$pp["atributo_nombre"].'</p>
+                                    </div>
+                                    <div class="cantidad">
+                                        <p>Precio unit.: $'.number_format($pp["precio_unitario"], 2).'</p>
+                                        <p>Cantidad: '.strval($pp["cantidad"]).'</p>
+                                    </div>
+                                    <div class="precio_item">
+                                        $'.number_format($pp["precio_unitario"] * $pp["cantidad"], 2).'
+                                    </div>
+                                </div>
+                            </li>'); 
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <div class="section envio">
+                    <h2 class="header">Datos de <?php echo $pedido["envio"] == 1 ? "envio" : "retiro" ?></h2>
+                    <p class="seleccionaste">Seleccionaste: <b><?php echo $seleccionaste?></b></p>
+                    <div class="info-envio">
+                        <h3>Datos:</h3>
+                        <div class="row">
+                            <b>Nombre:</b>
+                            <p><?php echo $pedido["envio_nombre"] ?></p>
                         </div>
-                    </li>
-                    <li>
-                        <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                        <div class="info">
-                            <div class="descripcion">
-                                <p class="id">#123</p>
-                                <h3>Titulo del producto</h3>
-                                <p class="tags">Color: azul</p>
-                            </div>
-                            <div class="cantidad">
-                                <p>Precio unit.: $1500.00</p>
-                                <p>Cantidad: 5</p>
-                            </div>
-                            <div class="precio_item">
-                                $1500.00
-                            </div>
+                        <div class="row">
+                            <b>Direccion:</b>
+                            <p><?php echo $pedido["envio_direccion"] ?></p>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="section envio">
-                <h2 class="header">Datos de envio</h2>
-                <p class="seleccionaste">Seleccionaste: <b>Envio a domicilio</b></p>
-                <div class="info-envio">
-                    <h3>Datos:</h3>
-                    <div class="row">
-                        <b>Nombre:</b>
-                        <p>Rodrigo Dueñas</p>
-                    </div>
-                    <div class="row">
-                        <b>Direccion:</b>
-                        <p>Sara Sofía 59847 Hernandes del mirador</p>
-                    </div>
-                    <div class="row">
-                        <b>DNI:</b>
-                        <p>35585339</p>
-                    </div>
-                    <div class="row">
-                        <b>Telefono:</b>
-                        <p>+54 9 11-3133-5455</p>
+                        <div class="row">
+                            <b>DNI:</b>
+                            <p><?php echo $pedido["envio_dni"] ?></p>
+                        </div>
+                        <div class="row">
+                            <b>Telefono:</b>
+                            <p><?php echo $pedido["envio_telefono"] ?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="section pago">
-                <h2 class="header">Datos de pago</h2>
-                <div class="info-pago">
-                    <p>Total: <b>$4,500.00</b> </p>
-                    <p>Abonado con la tarjeta terminada en 4578 </p>
-                    <p>Titular: Rodrigo Dueñas</p>
+                <div class="section pago">
+                    <h2 class="header">Datos de pago</h2>
+                    <div class="info-pago">
+                        <p>Total: <b>$<?php echo number_format($pedido["importe"], 2); ?></b> </p>
+                        <p>Abonado con la tarjeta terminada en <?php echo substr($pedido["pago_tarjeta"], -4) ?> </p>
+                        <p>Titular: <?php echo $pedido["pago_titular"] ?></p>
+                    </div>
                 </div>
-            </div>
-        </section>
+                </section>
+            <?php?>
     </main>
 
     <script src="./assets/js/carritoenvio.js"></script>
