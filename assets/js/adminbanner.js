@@ -11,6 +11,6 @@ function validateInput() {
     }
 
     if (!errors) {
-        window.location.href = "";
+        document.getElementById("bannerForm").submit();
     }
 }

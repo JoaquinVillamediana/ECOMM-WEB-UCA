@@ -1,5 +1,40 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+$conn = conectarBD();
+$query = 'SELECT * FROM banner';
+$respuesta = consultaSQL($conn, $query);
+
+if ($respuesta->num_rows > 0) {
+    while ($row = $respuesta->fetch_assoc()) {
+        $image_url = $row["imagen"];
+        $link = $row["link"];
+    }
+}
+desconectarBD($conn);
+
+if($_POST)
+{
+    $conn = conectarBD();
+
+    $target_dir = "assets/img/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], "../../".$target_file)) {
+        $query = 'UPDATE banner SET imagen = "'. $target_file .'", link = "'. $_POST["link"] .'" WHERE id = 1;';
+        consultaSQL($conn, $query);
+        desconectarBD($conn);
+  } else {
+    desconectarBD($conn);
+    echo("Se produjo un error al conectar con la base de datos");die;
+  }
+
+
+
+    header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +72,9 @@ include_once('../../onlyadmin.php');
         <div class="container">
             <h1>Banner</h1>
             <h2 class="title">Banner Actual</h2>
-            <img class="current-banner" src="https://www.softub.ch/wp-content/uploads/Black-Friday-Sale.jpg" alt="">
+            <img class="current-banner" src="../../<?php echo($image_url) ?>" alt="">
             <h2 class="title">Actualizar Banner</h2>
-            <form action="">
+            <form action="" method="POST" id="bannerForm" enctype="multipart/form-data">
                 <input class="" name="image" id="image" type="file">
                 <label for="">Enlace <i>Opcional</i></label>
                 <input type="text" name="link" minlength="3" maxlength="60">

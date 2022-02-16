@@ -1,5 +1,6 @@
 <?php
-include_once('../../onlyadmin.php');
+include_once('../../onlyadmin.php'); 
+include_once('../../db.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +43,6 @@ include_once('../../onlyadmin.php');
                         <tr>
                             <th>ID</th>
                             <th>ID Usuario</th>
-                            <th>Producto</th>
                             <th>Cantidad</th>
                             <th>Fecha</th>
                             <th>Estado</th>
@@ -50,51 +50,47 @@ include_once('../../onlyadmin.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#23</td>
-                            <td>1</td>
-                            <td>Pelota adidas ADX40</td>
-                            <td>2</td>
-                            <td>06/04/2021 14:34:21</td>
-                            <td><span class="state pending">Pago Pendiente</span></td>
-                            <td><a href="details.html" class="btn-admin">Revisar</a></td>
-                        </tr>
-                        <tr>
-                            <td>#23</td>
-                            <td>1</td>
-                            <td>Pelota adidas ADX40</td>
-                            <td>2</td>
-                            <td>06/04/2021 14:34:21</td>
-                            <td><span class="state success">Pago Exitoso</span></td>
-                            <td><a href="details.html" class="btn-admin">Revisar</a></td>
-                        </tr>
-                        <tr>
-                            <td>#23</td>
-                            <td>1</td>
-                            <td>Pelota adidas ADX40</td>
-                            <td>2</td>
-                            <td>06/04/2021 14:34:21</td>
-                            <td><span class="state pending">Pago Pendiente</span></td>
-                            <td><a href="details.html" class="btn-admin">Revisar</a></td>
-                        </tr>
-                        <tr>
-                            <td>#23</td>
-                            <td>1</td>
-                            <td>Pelota adidas ADX40</td>
-                            <td>2</td>
-                            <td>06/04/2021 14:34:21</td>
-                            <td><span class="state cancel">Pago Cancelado</span></td>
-                            <td><a href="details.html" class="btn-admin">Revisar</a></td>
-                        </tr>
-                        <tr>
-                            <td>#23</td>
-                            <td>1</td>
-                            <td>Pelota adidas ADX40</td>
-                            <td>2</td>
-                            <td>06/04/2021 14:34:21</td>
-                            <td><span class="state pending">Pago Pendiente</span></td>
-                            <td><a href="details.html" class="btn-admin">Revisar</a></td>
-                        </tr>
+                    <?php
+
+                         $conn = conectarBD();
+                         $query = 'SELECT pedidos.*,count(pedidos_producto.id) as cant_prod 
+                         FROM `pedidos` 
+                         LEFT JOIN pedidos_producto 
+                         ON(pedidos_producto.id_pedido = pedidos.id) 
+                         GROUP BY (pedidos.id)
+                         ';
+                         $respuesta = consultaSQL($conn, $query);
+                        
+                         if ($respuesta->num_rows > 0) {
+                             while ($row = $respuesta->fetch_assoc()) {
+                                switch($row["id_estado"])
+                                {
+                                    case 1:
+                                        $aEstado = ["Pago Pendiente","pending"];
+                                        break;
+                                        case 2:
+                                            $aEstado = ["Pago Aprobado","success"];
+                                            break;
+                                            case 3:
+                                                $aEstado = ["Pago Cancelado","cancel"];
+                                                break;
+                                }
+
+
+                                 echo ('<tr>
+                                <td>#'.$row["id"].'</td>
+                                <td>'.$row["id_usuario"].'</td>
+                                <td>'.$row["cant_prod"].'</td>
+                                <td>'.$row["fecha"].'</td>
+                                <td><span class="state '.$aEstado[1].'">'.$aEstado[0].'</span></td>
+                                <td><a href="details.php?id='.$row["id"].'" class="btn-admin">Revisar</a></td>
+                                 </tr>');
+                             }
+                         }
+                         desconectarBD($conn);
+
+                    ?>
+                        
                     </tbody>
                 </table>
             </div>
