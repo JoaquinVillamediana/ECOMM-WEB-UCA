@@ -57,6 +57,7 @@ include_once('onlyguest.php');
                     if ($respuesta->num_rows > 0) {
                         while ($row = $respuesta->fetch_assoc()) {
                             $_SESSION['user'] = $row['email'];
+                            $_SESSION["userid"] = $row["id"];
                             $_SESSION['user_type'] = $row['usertype'];
 
                             desconectarBD($conn);

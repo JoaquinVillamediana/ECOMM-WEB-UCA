@@ -1,3 +1,5 @@
+let form = document.querySelector("#form")
+
 function sonLetras(str){
     var x = 0
     for (let i of str){
@@ -58,7 +60,7 @@ function mostrarErrorInput(id, mensajeError){
 function confirmar(){
     var x = validarInputs()
     if (x) {
-        window.location.href = "pedido.html"
+        form.submit()
     }
 }
 

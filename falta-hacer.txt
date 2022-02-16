@@ -1,2 +1,9 @@
-- ver configuraciones adicionales del admin, por ejemplo: configurar cantidad de productos que se muestren en la home
+- ver configuraciones adicionales del admin, 
+    por ejemplo: 
+        - configurar cantidad de productos que se muestren en la home
+        - poder elegir qué productos se muestran en la home
+        - estado por defecto de los pedidos cuando se crean
 - configurar la cantidad de producto que se compra en product.php y poder cambiarlo tambien desde el carrito.php
+- buscador
+- mis pedidos
+- pedido

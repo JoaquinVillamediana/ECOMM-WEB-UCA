@@ -92,7 +92,7 @@ else{
         <div class="container">
             <img src="./assets/img/logo.png" alt="" class="logo">
             <div class="links">
-                <a href="index.html" class="link">Volver al sitio</a>
+                <a href="index.php" class="link">Volver al sitio</a>
             </div>
         </div>
     </header>
@@ -149,24 +149,6 @@ else{
                     </div>        
                 '
             ?>
-            <!-- <li>
-                <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                <div class="info">
-                    <div class="descripcion">
-                        <p class="id">#123</p>
-                        <h3>Titulo del producto</h3>
-                        <p class="tags">Color: azul</p>
-                    </div>
-                    <div class="cantidad">
-                        <p>Precio unit.: $1500.00</p>
-                        <p>Cantidad: 5</p>
-                    </div>
-                    <div class="precio_item">
-                        $1500.00
-                        <button class="eliminar">X</button>
-                    </div>
-                </div>
-            </li> -->
     </main>
 
 
