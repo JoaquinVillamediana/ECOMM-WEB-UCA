@@ -9,16 +9,45 @@ if ($_POST){
     $details=$_POST['details'];
     $stock=$_POST['stock'];
     $descuento=$_POST['discount'];
-
-    $img = $_POST['image[]'];
-    $attrs = $_POST['attrs'];
+    $precioFinal = $precio-(($descuento/100)*$precio);
+    $img = $_POST['image'];
+    $attrs = $_POST['attr'];
     
     $conn = conectarBD();
-    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $descuento, $stock)";
-    
+    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $precioFinal, $stock)";
     consultaSQL($conn,$query);
-    desconectarBD();
+    desconectarBD($conn);
+
+    $conn2 = conectarBD();
+    $query2 = "SELECT id FROM producto ORDER BY id DESC LIMIT 1";
+    $result = consultaSQL($conn2,$query2);
+    $row = $result->fetch_assoc();
+    $maxID = $row['id'];
+    desconectarBD($conn2);
+
+
+    foreach($img as $img_url){
+        if ($img_url!=""){
+            $imagen = "assets/img/".$img_url;
+            $conn3 = conectarBD();
+            $query3 = "INSERT INTO producto_imagenes (id_producto, imagen) VALUES ($maxID, '$imagen')";
+            consultaSQL($conn3,$query3);
+            desconectarBD($conn3);
+        }
+
+    }
     header("Location: index.php");
+    foreach($attrs as $attr){
+        if ($attr!=""){
+            $conn4 = conectarBD();
+            $query4 = "INSERT INTO producto_atributo (id_producto, nombre) VALUES ($maxID, '$attr')";
+            consultaSQL($conn4,$query4);
+            desconectarBD($conn4);
+            
+        }
+    }
+    
+
 }
 
 ?>
@@ -85,7 +114,7 @@ if ($_POST){
                     </ul>
                 </div>
             </div>
-            <div class="item attrs" id="image">
+            <div class="item attrs" id="attrs">
                 <label for="" id="images-label">Atributos</label>
                 <div class="combo" id="attr-combo">
                     <input type="text" name="attrs" id="attr-input" data-attr-id="1">
