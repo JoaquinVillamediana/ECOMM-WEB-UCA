@@ -4,5 +4,7 @@
         - poder elegir qué productos se muestran en la home
         - estado por defecto de los pedidos cuando se crean
 - cambiar cantidad en el carrito.php
+- mensaje en carrito.php si está vacio
+- mensaje en mispedidos.php si no tiene pedidos
 - checkear stock de los productos para mostrarlos/venderlos
 - descontar stock
