@@ -4,10 +4,9 @@
         - poder elegir qué productos se muestran en la home
         - estado por defecto de los pedidos cuando se crean
     (pincha)
-
 - cambiar cantidad en el carrito.php (pincha)
 - si eliminas el unico item q hay en el carrito se bugea, no deberia dejar avanzar si no hay items
 - checkear stock de los productos para mostrarlos/venderlos
 - revisar que el descuento se muestre en todos lados
 - anular carrito si no hay stock??? (pincha)
-- footer revisar links
+- updatear items totales y precio total en carrito.php
