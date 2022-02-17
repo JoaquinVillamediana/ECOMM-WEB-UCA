@@ -35,7 +35,7 @@ session_start();
                     producto_imagenes.imagen as url_img, producto.descuento as descuento from producto 
                     INNER JOIN categoria ON producto.id_categoria=categoria.id
                     INNER JOIN producto_imagenes ON producto.id=producto_imagenes.id_producto 
-                    WHERE descuento IS NOT NULL';;
+                    WHERE descuento IS NOT NULL and stock > 0';;
                     $result = consultaSQL($conn,$query);
                     $id="";
                     while ($producto = $result->fetch_assoc()){
@@ -67,7 +67,7 @@ session_start();
             <div class="items">
                 <?php 
                     $conn = conectarBD();
-                    $query = 'SELECT producto.*, categoria.nombre as nombre_categoria FROM producto JOIN categoria ON producto.id_categoria = categoria.id LIMIT 12';
+                    $query = 'SELECT producto.*, categoria.nombre as nombre_categoria FROM producto JOIN categoria ON producto.id_categoria = categoria.id WHERE stock > 0 LIMIT 12';
                     $result = consultaSQL($conn,$query);
                     while ($producto = mysqli_fetch_assoc($result)){
                         $id_producto = $producto["id"];

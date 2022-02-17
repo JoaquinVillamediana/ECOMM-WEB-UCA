@@ -32,7 +32,7 @@ session_start();
         $query = "SELECT producto.*, categoria.nombre as nombre_categoria FROM producto JOIN categoria ON producto.id_categoria = categoria.id WHERE producto.id = $id_producto";
         $result = consultaSQL($conn,$query);
         $producto = $result->fetch_assoc();
-        if($producto){
+        if($producto && $producto["stock"] > 0){
             $query = "SELECT imagen FROM producto_imagenes WHERE id_producto = $id_producto";
             $result = consultaSQL($conn,$query);
             $imagenes = [];
