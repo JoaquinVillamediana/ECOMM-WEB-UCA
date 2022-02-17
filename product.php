@@ -77,7 +77,10 @@ session_start();
             }
             echo('
                 <p class="price">$ '.number_format($producto["precio"], 2).' </p>
-
+                ');
+            if(!empty($_SESSION['user']))
+            {
+                echo('
                 <div class="botones">
                     <a onclick="menos()" class="btn-carrito menos"> - </a>
                     <a onclick="agregarProducto()" class="btn-carrito">AGREGAR AL CARRITO (<span id="cantidad"></span>)</a>
@@ -86,6 +89,9 @@ session_start();
                 <div class="alerta d-none" id="alerta">
                     Agregado correctamente al carrito
                 </div>
+                ');
+            }
+                echo('
             </div>
             <div class="main-container">
                 <div class="detalles">
