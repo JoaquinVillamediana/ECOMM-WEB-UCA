@@ -1,5 +1,16 @@
 <?php
+include('db.php');
 session_start();
+
+$conn2 = conectarBD();
+$query = 'SELECT * FROM banner;';
+$result = consultaSQL($conn2,$query);
+while($row = $result->fetch_assoc())
+{   
+    $banner_img = $row['imagen'];
+    $banner_link = $row['link'];
+}
+desconectarBD($conn2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +30,8 @@ session_start();
     
     <section class="banner">
         <div class="container">
-            <a href="">
-                <img class="img-banner" src="https://www.softub.ch/wp-content/uploads/Black-Friday-Sale.jpg" alt="">
+            <a href="<?php echo $banner_link; ?>" target="_blank">
+                <img class="img-banner" src="<?php echo $banner_img; ?>" alt="">
             </a>
         </div>
     </section>
@@ -29,7 +40,6 @@ session_start();
             <h2 class="title">Grandes ofertas</h2>
             <div class="items">
                 <?php 
-                    include('db.php');
                     $conn = conectarBD();
                     $query = 'SELECT categoria.nombre as nom_cat, producto.nombre as nom_prod, producto.precio as precio, producto.id as id, 
                     producto_imagenes.imagen as url_img, producto.descuento as descuento from producto 
