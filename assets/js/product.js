@@ -49,9 +49,26 @@ function agregarProducto(){
     xhr.send(data);
 }
 
+function menos(){
+    cantidad -= 1
+    if(cantidad < 1)
+        cantidad = 1
+    actualizarCantidad()
+}
+
+function mas(){
+    cantidad += 1
+    actualizarCantidad()
+}
+
 function mostrarAlerta(){
     let alerta = document.getElementById("alerta")
     console.log("alerta")
     alerta.classList.remove("d-none")
-    setTimeout(() => {alerta.classList.add("d-none")}, 1000)
+    setTimeout(() => {alerta.classList.add("d-none")}, 3000)
+}
+
+function actualizarCantidad(){
+    let spanCantidad = document.getElementById("cantidad");
+    spanCantidad.innerText = cantidad
 }

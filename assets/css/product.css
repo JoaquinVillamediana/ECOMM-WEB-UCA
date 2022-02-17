@@ -135,6 +135,27 @@
     border: 1px solid #fff;
 }
 
+.btn-carrito.mas{
+
+    background-color: green;
+    font-size: 40px;
+}
+
+.btn-carrito.mas:hover{
+    background-color: rgb(5, 95, 5);
+
+}
+
+.btn-carrito.menos{
+    background-color: red;
+    font-size: 40px;
+}
+
+.btn-carrito.menos:hover{
+    background-color: rgb(182, 3, 3);
+
+}
+
 .main-container .btn-talle {
     width: 20%;
     border: none;
