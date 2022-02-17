@@ -5,6 +5,5 @@
         - estado por defecto de los pedidos cuando se crean
 - configurar la cantidad de producto que se compra en product.php y poder cambiarlo tambien desde el carrito.php
 - buscador
-- hacer algun tipo de pop up o algo en product.php para que se note que se agrego el producto al carrito
 - checkear stock de los productos para mostrarlos/venderlos
 - descontar stock

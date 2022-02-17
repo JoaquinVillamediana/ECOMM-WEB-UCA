@@ -80,7 +80,9 @@ session_start();
                 <div class="botones">
                     <a onclick="agregarProducto()" class="btn-carrito">AGREGAR AL CARRITO</a>
                 </div>
-
+                <div class="alerta d-none" id="alerta">
+                    Agregado correctamente al carrito
+                </div>
             </div>
             <div class="main-container">
                 <div class="detalles">

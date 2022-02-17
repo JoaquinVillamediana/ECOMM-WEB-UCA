@@ -40,11 +40,18 @@ function agregarProducto(){
 
     xhr.addEventListener("readystatechange", function() {
         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            console.log(this.responseText);
+            mostrarAlerta()
         }
     });
 
     xhr.open("POST", "carrito.php");
 
     xhr.send(data);
+}
+
+function mostrarAlerta(){
+    let alerta = document.getElementById("alerta")
+    console.log("alerta")
+    alerta.classList.remove("d-none")
+    setTimeout(() => {alerta.classList.add("d-none")}, 1000)
 }
