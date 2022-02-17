@@ -40,11 +40,35 @@ function agregarProducto(){
 
     xhr.addEventListener("readystatechange", function() {
         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            console.log(this.responseText);
+            mostrarAlerta()
         }
     });
 
     xhr.open("POST", "carrito.php");
 
     xhr.send(data);
+}
+
+function menos(){
+    cantidad -= 1
+    if(cantidad < 1)
+        cantidad = 1
+    actualizarCantidad()
+}
+
+function mas(){
+    cantidad += 1
+    actualizarCantidad()
+}
+
+function mostrarAlerta(){
+    let alerta = document.getElementById("alerta")
+    console.log("alerta")
+    alerta.classList.remove("d-none")
+    setTimeout(() => {alerta.classList.add("d-none")}, 3000)
+}
+
+function actualizarCantidad(){
+    let spanCantidad = document.getElementById("cantidad");
+    spanCantidad.innerText = cantidad
 }

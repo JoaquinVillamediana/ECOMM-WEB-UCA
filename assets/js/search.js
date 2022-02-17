@@ -11,6 +11,6 @@ function validateForm() {
     }
 
     if (!errors) {
-        window.location.href = "";
+        document.getElementById('seachForm').submit();
     }
 }

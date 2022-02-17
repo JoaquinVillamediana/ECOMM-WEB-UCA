@@ -78,9 +78,13 @@ session_start();
                 <p class="price">$ '.number_format($producto["precio"], 2).' </p>
 
                 <div class="botones">
-                    <a onclick="agregarProducto()" class="btn-carrito">AGREGAR AL CARRITO</a>
+                    <a onclick="menos()" class="btn-carrito menos"> - </a>
+                    <a onclick="agregarProducto()" class="btn-carrito">AGREGAR AL CARRITO (<span id="cantidad"></span>)</a>
+                    <a onclick="mas()" class="btn-carrito mas"> + </a>
                 </div>
-
+                <div class="alerta d-none" id="alerta">
+                    Agregado correctamente al carrito
+                </div>
             </div>
             <div class="main-container">
                 <div class="detalles">
@@ -95,7 +99,9 @@ session_start();
         }
     ?>
     <script src="./assets/js/generalfront.js"></script>
-
+    <script>
+        actualizarCantidad()
+    </script>
 </body>
 
 </html>

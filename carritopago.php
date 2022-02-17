@@ -15,6 +15,7 @@
                   WHERE id_usuario = $userid";
         $result = consultaSQL($conn, $query);
         $carrito = $result->fetch_assoc();
+        $id_carrito = $carrito["id"];
         $nombre = $carrito["nombre"];
         $direccion = $carrito["direccion"];
         $telefono = $carrito["telefono"];
@@ -26,6 +27,20 @@
                   VALUES($userid, 1, $envio, '$nombre', '$direccion', $dni, '$telefono', '$titular', '$tarjeta', '$expiracion', $cvc, $importe)";
         consultaSQL($conn, $query);
         $id_pedido = $conn->insert_id;
+        // Hago los pedido_producto
+        $query = "INSERT INTO pedidos_producto(id_pedido, id_producto, id_atributo, cantidad, precio_unitario)
+                  SELECT $id_pedido as id_pedido, id_producto, id_atributo, cantidad, producto.precio as precio_unitario
+                  FROM carrito_productos 
+                  JOIN producto on producto.id = carrito_productos.id_producto 
+                  WHERE id_carrito = $id_carrito";
+        echo $query;
+        consultaSQL($conn, $query);
+        // Vuelo el carrito y los carrito_producto
+        $query = "DELETE FROM carrito WHERE id = $id_carrito";
+        $result = consultaSQL($conn, $query);
+        $query = "DELETE FROM carrito_productos WHERE id_carrito = $id_carrito";
+        consultaSQL($conn, $query);
+
         desconectarBD($conn);
         header("Location: pedido.php?id=$id_pedido");
     }

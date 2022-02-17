@@ -80,6 +80,14 @@
     margin: 10px;
 }
 
+.alerta{
+    color: #0f5132;
+    border: 3px solid #badbcc;
+    border-radius: 0.5rem;
+    background-color: #d1e7dd;
+    padding: 20px;
+}
+
 .main-container .btn-carrito {
     cursor: pointer;
     background-color: #0e36c9;
@@ -125,6 +133,27 @@
     background-color: #0e36c9;
     color: #fff;
     border: 1px solid #fff;
+}
+
+.btn-carrito.mas{
+
+    background-color: green;
+    font-size: 40px;
+}
+
+.btn-carrito.mas:hover{
+    background-color: rgb(5, 95, 5);
+
+}
+
+.btn-carrito.menos{
+    background-color: red;
+    font-size: 40px;
+}
+
+.btn-carrito.menos:hover{
+    background-color: rgb(182, 3, 3);
+
 }
 
 .main-container .btn-talle {
