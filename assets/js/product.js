@@ -1,4 +1,4 @@
-var id_atributo_elegido, id_producto, cantidad = 1;
+var id_atributo_elegido, id_producto, cantidad = 1, cantidad_max;
 
 function btnseleccionado(x, _id_atributo) {
     id_atributo_elegido = _id_atributo
@@ -58,6 +58,8 @@ function menos(){
 
 function mas(){
     cantidad += 1
+    if(cantidad > cantidad_max)
+        cantidad = cantidad_max
     actualizarCantidad()
 }
 
