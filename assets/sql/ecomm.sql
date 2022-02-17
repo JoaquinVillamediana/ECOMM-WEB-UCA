@@ -14,8 +14,8 @@
 
 
 -- Dumping database structure for ecomm
-CREATE DATABASE IF NOT EXISTS `ecomm` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ecomm`;
+CREATE DATABASE IF NOT EXISTS `ecomm_uca` /*!40100 DEFAULT CHARACTER SET utf8mb4 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `ecomm_uca`;
 
 -- Dumping structure for table ecomm.banner
 CREATE TABLE IF NOT EXISTS `banner` (
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `banner` (
   `imagen` varchar(255) NOT NULL,
   `link` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.banner: ~0 rows (approximately)
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `carrito` (
   PRIMARY KEY (`id`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.carrito: ~3 rows (approximately)
 /*!40000 ALTER TABLE `carrito` DISABLE KEYS */;
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `carrito_productos` (
   CONSTRAINT `carrito_productos_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
   CONSTRAINT `carrito_productos_ibfk_2` FOREIGN KEY (`id_atributo`) REFERENCES `producto_atributo` (`id`),
   CONSTRAINT `carrito_productos_ibfk_3` FOREIGN KEY (`id_carrito`) REFERENCES `carrito` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.carrito_productos: ~3 rows (approximately)
 /*!40000 ALTER TABLE `carrito_productos` DISABLE KEYS */;
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.categoria: ~5 rows (approximately)
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.estados: ~3 rows (approximately)
 /*!40000 ALTER TABLE `estados` DISABLE KEYS */;
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `pedidos_ibfk_3` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.pedidos: ~2 rows (approximately)
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `pedidos_producto` (
   CONSTRAINT `pedidos_atributos` FOREIGN KEY (`id_atributo`) REFERENCES `producto_atributo` (`id`),
   CONSTRAINT `pedidos_producto_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`),
   CONSTRAINT `pedidos_producto_ibfk_3` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.pedidos_producto: ~0 rows (approximately)
 /*!40000 ALTER TABLE `pedidos_producto` DISABLE KEYS */;
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `producto` (
   PRIMARY KEY (`id`),
   KEY `id_categoria` (`id_categoria`),
   CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.producto: ~3 rows (approximately)
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `producto_atributo` (
   PRIMARY KEY (`id`),
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `producto_atributo_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.producto_atributo: ~8 rows (approximately)
 /*!40000 ALTER TABLE `producto_atributo` DISABLE KEYS */;
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `producto_imagenes` (
   PRIMARY KEY (`id`),
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `producto_imagenes_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.producto_imagenes: ~5 rows (approximately)
 /*!40000 ALTER TABLE `producto_imagenes` DISABLE KEYS */;
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `usertype` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table ecomm.usuarios: ~7 rows (approximately)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
