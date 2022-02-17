@@ -128,7 +128,7 @@ else{
                 {
                 while($carrito_producto = $carrito_productos->fetch_assoc()){
                     echo('
-                        <li id="carrito_producto_'.$carrito_producto["id"].'">
+                        <li id="carrito_producto_'.$carrito_producto["id"].'" precio="'.$carrito_producto["precio"] * $carrito_producto["cantidad"].'">
                             <img src="'.$carrito_producto["src"].'" alt="">
                             <div class="info">
                                 <div class="descripcion">
@@ -155,11 +155,11 @@ else{
                         <div class="info">
                             <div class="cantidades">
                                 Items totales:
-                                <p>'.$carrito_productos->num_rows.' item(s)</p>
+                                <p><span id="itemsTotales">'.$carrito_productos->num_rows.'</span> item(s)</p>
                             </div>
                             <div class="precios">
                                 <span>Subtotal:</span>
-                                <p>$'. number_format($carrito["subtotal"], 2) .'</p>
+                                <p id="precioTotal" precio="'.$carrito["subtotal"].'">$'. number_format($carrito["subtotal"], 2) .'</p>
                             </div>
                         </div>
                         <a class="primary btn" href="carritoenvio.php">Continuar</a>
