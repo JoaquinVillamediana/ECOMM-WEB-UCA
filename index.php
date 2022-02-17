@@ -97,7 +97,7 @@ session_start();
                             <div class="content">
                                 <p class="category">' . $producto["nombre_categoria"] . '</p>
                                 <h5 class="name">' . $producto["nombre"] . '</h5>
-                                <p class="price"><span class="old">$'.$producto['precio'].'</span><span class="new">$ '. number_format($producto["precio"], 2) .'</span></p>
+                                <p class="price"><span class="old">$'.$producto['precio'].'</span><span class="new">$ '. number_format($producto["descuento"], 2) .'</span></p>
                                 <a href="product.php?id='. $producto["id"] .'" class="btn-product">Ver producto</a>
                             </div>
                             <div class="discount">'.intval($porcentaje).'% OFF!</div>
