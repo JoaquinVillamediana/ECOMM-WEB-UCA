@@ -7,7 +7,7 @@ function conectarBD()
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "ecomm_uca";
+    $dbname = "ecomm";
     // Crear conexión
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Checkear conexión

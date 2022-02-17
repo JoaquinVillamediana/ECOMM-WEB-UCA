@@ -122,7 +122,7 @@ function validateFields() {
     }
 
     if (!errors) {
-        window.location.href = "./index.php";
+        document.getElementById("productForm").submit();
     }
 }
 

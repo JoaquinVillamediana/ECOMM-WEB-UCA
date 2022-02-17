@@ -2,15 +2,24 @@
 include_once('../../onlyadmin.php');
 include_once('../../db.php');
 
-$id_cat=$_POST['category_input'];
-$nombre=$_POST['name_input'];
-$precio=$_POST['price-input'];
-$detalles=$_POST['details-input'];
-$stock=$_POST['stock-input'];
-$descuento=$_POST['discount-input'];
+if ($_POST){
+    $id_cat=$_POST['category'];
+    $nombre=$_POST['name'];
+    $precio=$_POST['price'];
+    $details=$_POST['details'];
+    $stock=$_POST['stock'];
+    $descuento=$_POST['discount'];
 
-$query = 'INSERT INTO product values ('.$id_cat.','.$nombre.','.$precio.','.$detalles.','.$descuento.','.$stock.')'
-
+    $img = $_POST['image[]'];
+    $attrs = $_POST['attrs'];
+    
+    $conn = conectarBD();
+    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $descuento, $stock)";
+    
+    consultaSQL($conn,$query);
+    desconectarBD();
+    header("Location: index.php");
+}
 
 ?>
 
@@ -55,7 +64,7 @@ $query = 'INSERT INTO product values ('.$id_cat.','.$nombre.','.$precio.','.$det
             </div>
             <div class="item" id="category">
                 <label for="">Categoria</label>
-                <select name="" id="category-input">
+                <select name="category" id="category-input">
                 <?php 
                 $conn = conectarBD();
                 $query = "select * from categoria";
@@ -63,7 +72,7 @@ $query = 'INSERT INTO product values ('.$id_cat.','.$nombre.','.$precio.','.$det
                 if ($resultado->num_rows >0){
                     while ($row = $resultado->fetch_assoc()){
                         ?>
-                        <option value=<?php echo $row['id']?>><?php echo $row['nombre']?></option>
+                        <option value=<?php echo $row['id'];?>><?php echo $row['nombre'];?></option>
                     <?php }
                 } ?>
                 </select>
@@ -106,11 +115,11 @@ $query = 'INSERT INTO product values ('.$id_cat.','.$nombre.','.$precio.','.$det
             </div>
             <div class="item" id="details">
                 <label for="">Detalles</label>
-                <textarea name="" cols="30" id="details-input" rows="10"></textarea>
+                <textarea name="details" cols="30" id="details-input" name="details" rows="10"></textarea>
                 <span class="error">Campo obligatorio. (min 3 car. max 1050 car.)</span>
             </div>
             <div style="text-align: center;">
-                <button type="submit" onclick="validateFields()" class="btn-create">Crear</button>
+                <button onclick="validateFields()" class="btn-create">Crear</button>
             </div>
         </form>
     </div>
