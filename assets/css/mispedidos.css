@@ -50,7 +50,7 @@ h1 {
     font-weight: bold;
 }
 
-.container.orders .item .status.approve {
+.container.orders .item .status.success {
     color: green;
     font-weight: bold;
 }

@@ -22,6 +22,10 @@
         $importe = $carrito["importe"];
         $dni = $carrito["dni"];
         $envio = $carrito["envio"];
+
+        // TODO: Reviso si hay stock de todo
+        
+
         // Hago el pedido
         $query = "INSERT INTO pedidos(id_usuario, id_estado, envio, envio_nombre, envio_direccion, envio_dni, envio_telefono, pago_titular, pago_tarjeta, pago_expiracion, pago_cvc, importe)
                   VALUES($userid, 1, $envio, '$nombre', '$direccion', $dni, '$telefono', '$titular', '$tarjeta', '$expiracion', $cvc, $importe)";
@@ -33,13 +37,31 @@
                   FROM carrito_productos 
                   JOIN producto on producto.id = carrito_productos.id_producto 
                   WHERE id_carrito = $id_carrito";
-        echo $query;
+        
         consultaSQL($conn, $query);
-        // Vuelo el carrito y los carrito_producto
-        $query = "DELETE FROM carrito WHERE id = $id_carrito";
+
+        // Bajo el stock
+
+        $query = "SELECT * FROM carrito_productos WHERE id_carrito = $id_carrito";
         $result = consultaSQL($conn, $query);
+        while($row = $result->fetch_assoc())
+        {
+            $id_producto = $row["id_producto"];
+            $cantidad = $row["cantidad"];
+
+            $conn2 = conectarBD();
+            $query2 = "UPDATE producto SET stock = ( producto.stock - ".intval($cantidad)." ) WHERE producto.id = $id_producto";
+            
+            consultaSQL($conn2,$query2);
+            desconectarBD($conn2);
+        }
+
+        // Vuelo el carrito y los carrito_producto
         $query = "DELETE FROM carrito_productos WHERE id_carrito = $id_carrito";
         consultaSQL($conn, $query);
+        $query = "DELETE FROM carrito WHERE id = $id_carrito";
+        $result = consultaSQL($conn, $query);
+        
 
         desconectarBD($conn);
         header("Location: pedido.php?id=$id_pedido");

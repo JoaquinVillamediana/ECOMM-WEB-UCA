@@ -1,5 +1,31 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php'); 
+$conn = conectarBD();
+$query = 'SELECT * 
+FROM `pedidos` 
+WHERE pedidos.id = '.$_GET["id"].'
+';
+$pedido = consultaSQL($conn, $query);
+if($pedido->num_rows < 1)
+{
+    header('Location: index.php');
+}
+$pedido = $pedido->fetch_assoc();
+
+switch($pedido["id_estado"])
+{
+    case 1:
+        $aEstado = ["Pago Pendiente","pending"];
+        break;
+        case 2:
+            $aEstado = ["Pago Aprobado","success"];
+            break;
+            case 3:
+                $aEstado = ["Pago Cancelado","cancel"];
+                break;
+}
+desconectarBD($conn);
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +62,15 @@ include_once('../../onlyadmin.php');
 
     <div class="container main-container">
         <form action="" id="productForm">
-            <h1 class="text-center my-1">Revisar orden #123</h1>
+            <h1 class="text-center my-1">Revisar orden #<?php echo($pedido["id"]); ?></h1>
             <div class="estado">
-                <p>Estado del pedido: </p> <span class="state pending" id="pendiente">Pendiente</span> <br>
+                <p>Estado del pedido: </p> <?php echo('<span class="state '.$aEstado[1].'">'.$aEstado[0].'</span>'); ?> <br>
+                <?php if($pedido["id_estado"] == 1){ ?>
                 <div id="botones">
                     <button type="button" class="btn btn-success" onclick="confirmar()">Confirmar</button>
                     <button type="button" class="btn btn-cancel" onclick="rechazar()">Rechazar</button>
                 </div>
+                <?php } ?>
                 <div id="modal" class="modal">
                     <div class="contenido">
                         <p>Seguro que desea <span id="texto-modal">rechazar</span> este pedido?</p>
@@ -55,74 +83,74 @@ include_once('../../onlyadmin.php');
             </div>
             <h2 class="prod">Productos</h2>
             <ul class="carrito_productos">
-                <li>
-                    <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
+                <?php 
+                $conn = conectarBD();
+                $query = "SELECT pedidos_producto.*, producto.nombre as producto_nombre, producto_atributo.nombre as atributo_nombre , (SELECT imagen FROM producto_imagenes WHERE producto_imagenes.id_producto = pedidos_producto.id_producto LIMIT 1) as producto_imagen
+                FROM pedidos_producto
+                JOIN producto ON producto.id = pedidos_producto.id_producto
+                JOIN  producto_atributo ON pedidos_producto.id_atributo = producto_atributo.id
+                WHERE id_pedido = ". $pedido["id"] ."";
+                $result = consultaSQL($conn,$query);
+
+                while($row = $result->fetch_assoc())
+                {
+                    echo('
+                    <li>
+                    <img src="../../'.$row['producto_imagen'].'" alt="">
                     <div class="info">
                         <div class="descripcion">
-                            <p class="id">#123</p>
-                            <h3>Titulo del producto</h3>
-                            <p class="tags">Color: azul</p>
+                            <p class="id">#'. $row["id"] .'</p>
+                            <h3>'. $row["producto_nombre"] .'</h3>
+                            <p class="tags">'. $row["atributo_nombre"] .'</p>
                         </div>
                         <div class="cantidad">
-                            <p>Precio unit.: $1500.00</p>
-                            <p>Cantidad: 5</p>
+                            <p>Precio unit.: $'. $row["precio_unitario"] .'</p>
+                            <p>Cantidad: '. $row["cantidad"] .'</p>
                         </div>
                         <div class="precio_item">
-                            $1500.00
+                            $'. intval($row["precio_unitario"]) * intval($row["cantidad"]) .'
                         </div>
                     </div>
                 </li>
-                <li>
-                    <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/016d4521d4934e588340ab0400be130f_9366/Pelota_de_futbol_playa_Uniforia_Pro_(UNISEX)_Turquesa_FH7347_01_standard.jpg" alt="">
-                    <div class="info">
-                        <div class="descripcion">
-                            <p class="id">#123</p>
-                            <h3>Titulo del producto</h3>
-                            <p class="tags">Color: azul</p>
-                        </div>
-                        <div class="cantidad">
-                            <p>Precio unit.: $1500.00</p>
-                            <p>Cantidad: 5</p>
-                        </div>
-                        <div class="precio_item">
-                            $1500.00
-                        </div>
-                    </div>
-                </li>
+                    ');
+                }
+                
+                ?>
+                
             </ul>
             <div class="section envio">
                 <h2 class="header">Datos de envio</h2>
-                <p class="seleccionaste">Seleccionó: <b>Envio a domicilio</b></p>
+                <p class="seleccionaste">Seleccionó: <b><?php if($pedido["envio"] == 1){ echo("Envio a domicilio"); }else{ echo("Retiro en local");}?> </b></p>
                 <div class="info-envio">
                     <h3>Datos de envio:</h3>
                     <div class="row">
                         <b>Nombre:</b>
-                        <p>Rodrigo Dueñas</p>
+                        <p><?php echo($pedido["envio_nombre"]); ?></p>
                     </div>
                     <div class="row">
                         <b>Direccion:</b>
-                        <p>Sara Sofía 59847 Hernandes del mirador</p>
+                        <p><?php echo($pedido["envio_direccion"]); ?></p>
                     </div>
                     <div class="row">
                         <b>DNI:</b>
-                        <p>35585339</p>
+                        <p><?php echo($pedido["envio_dni"]); ?></p>
                     </div>
                     <div class="row">
                         <b>Telefono:</b>
-                        <p>+54 9 11-3133-5455</p>
+                        <p><?php echo($pedido["envio_telefono"]); ?></p>
                     </div>
                 </div>
             </div>
             <div class="section pago">
                 <h2 class="header">Datos de pago</h2>
                 <div class="info-pago">
-                    <p><b>Total:</b> $4,500.00 </p>
-                    <p> <b>Titular:</b> Rodrigo Dueñas</p>
+                    <p><b>Total:</b> $<?php echo($pedido["importe"]); ?> </p>
+                    <p> <b>Titular:</b> <?php echo($pedido["pago_titular"]); ?></p>
                     <b> Datos de la tarjeta: </b>
                     <div class="datos-tarjeta">
-                        <p><b>Numero: </b> 4567-4568-4568-9876</p>
-                        <p><b>Fecha: </b> 11/22</p>
-                        <p><b>CVC: </b> 123</p>
+                        <p><b>Numero: </b> <?php echo($pedido["pago_tarjeta"]); ?></p>
+                        <p><b>Fecha: </b> <?php echo($pedido["pago_expiracion"]); ?></p>
+                        <p><b>CVC: </b> <?php echo($pedido["pago_cvc"]); ?></p>
                     </div>
                 </div>
             </div>
@@ -131,6 +159,31 @@ include_once('../../onlyadmin.php');
     </div>
     <script src="../../assets/js/adminordersdetails.js"></script>
     <script src="../../assets/js/generaladmin.js"></script>
+    <script>
+        function confirmar(confirmacion){
+    // modal.style.display = "block";
+    // accion = "confirmar"
+    // textoModal.innerHTML = accion
+    // if(!confirmacion)
+    //     return
+    // borrarBotones()
+    // pendiente.innerHTML = "Aprobado"
+    // pendiente.className = "state success"
+    window.location.replace("action.php?id=<?php echo($pedido["id"]); ?>&option=1");
+    }
+
+    function rechazar(confirmacion){
+    // modal.style.display = "block";
+    // accion = "rechazar"
+    // textoModal.innerHTML = accion
+    // if (!confirmacion)
+    //     return
+    // borrarBotones()
+    // pendiente.innerHTML = "Rechazado"
+    // pendiente.className = "state cancel"
+    window.location.replace("action.php?id=<?php echo($pedido["id"]); ?>&option=2");
+    }
+    </script>
 </body>
 
 </html>

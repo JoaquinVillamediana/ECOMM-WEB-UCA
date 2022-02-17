@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 </section>
-            <?php?>
+      
     </main>
 
     <script src="./assets/js/carritoenvio.js"></script>

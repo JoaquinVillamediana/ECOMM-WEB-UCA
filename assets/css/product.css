@@ -80,7 +80,7 @@
     margin: 10px;
 }
 
-.alerta{
+.alerta {
     color: #0f5132;
     border: 3px solid #badbcc;
     border-radius: 0.5rem;
@@ -97,8 +97,8 @@
     padding: 10px 0;
     text-align: center;
     text-decoration: none;
-    padding: 10px 50px;
-    font-size: 20px;
+    padding: 7px 15px;
+    font-size: 15px;
     border-radius: 5px;
     transition: all 0.1s ease;
     border: 1px solid #fff;
@@ -135,25 +135,22 @@
     border: 1px solid #fff;
 }
 
-.btn-carrito.mas{
-
-    background-color: green;
+.btn-carrito.mas {
+    background-color: #6e6e6e;
     font-size: 40px;
 }
 
-.btn-carrito.mas:hover{
-    background-color: rgb(5, 95, 5);
-
+.btn-carrito.mas:hover {
+    background-color: #808080;
 }
 
-.btn-carrito.menos{
-    background-color: red;
+.btn-carrito.menos {
+    background-color: #ccc;
     font-size: 40px;
 }
 
-.btn-carrito.menos:hover{
-    background-color: rgb(182, 3, 3);
-
+.btn-carrito.menos:hover {
+    background-color: rgb(156, 156, 156);
 }
 
 .main-container .btn-talle {

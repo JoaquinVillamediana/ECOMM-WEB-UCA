@@ -6,6 +6,10 @@ function traer_carrito($email_usuario, $conn){
                 JOIN usuarios ON carrito.id_usuario = usuarios.id 
                 WHERE usuarios.email = '$email_usuario'";
     $res = consultaSQL($conn, $query);
+    if($res->num_rows < 1)
+    {
+        $res = NULL;
+    }
     return $res;
 }
 
@@ -17,6 +21,10 @@ function traer_carrito_productos($id_carrito, $conn){
               JOIN producto_atributo ON producto_atributo.id = carrito_productos.id_atributo
               WHERE id_carrito = $id_carrito";
     $res = consultaSQL($conn, $query);
+    if($res->num_rows < 1)
+    {
+        $res = NULL;
+    }
     return $res;
 }
 
@@ -107,8 +115,17 @@ else{
             <?php 
                 include_once("db.php");
                 $conn = conectarBD();
-                $carrito = traer_carrito($_SESSION["user"], $conn)->fetch_assoc();
-                $carrito_productos = traer_carrito_productos($carrito["id"], $conn);
+                $carrito = traer_carrito($_SESSION["user"], $conn);
+                if(!empty($carrito))
+                {
+                    $carrito = $carrito->fetch_assoc();
+                    $carrito_productos = traer_carrito_productos($carrito["id"], $conn);
+                }else{
+                    $carrito_productos = NULL;
+                }
+                
+                if(!empty($carrito) && !empty($carrito_productos))
+                {
                 while($carrito_producto = $carrito_productos->fetch_assoc()){
                     echo('
                         <li id="carrito_producto_'.$carrito_producto["id"].'">
@@ -147,7 +164,10 @@ else{
                         </div>
                         <a class="primary btn" href="carritoenvio.php">Continuar</a>
                     </div>        
-                '
+                ';
+            }else{
+                echo("<p style='margin: 20px auto;'>No hay productos en tu carrito.</p>");
+            }
             ?>
     </main>
 

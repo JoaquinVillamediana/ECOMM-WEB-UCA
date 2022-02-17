@@ -3,8 +3,12 @@
         - configurar cantidad de productos que se muestren en la home
         - poder elegir qué productos se muestran en la home
         - estado por defecto de los pedidos cuando se crean
-- cambiar cantidad en el carrito.php
+    (pincha)
+
+- cambiar cantidad en el carrito.php (pincha)
+- si eliminas el unico item q hay en el carrito se bugea, no deberia dejar avanzar si no hay items
 - mensaje en carrito.php si está vacio
-- mensaje en mispedidos.php si no tiene pedidos
 - checkear stock de los productos para mostrarlos/venderlos
-- descontar stock
+- revisar que el descuento se muestre en todos lados
+- anular carrito si no hay stock??? (pincha)
+- footer revisar links
