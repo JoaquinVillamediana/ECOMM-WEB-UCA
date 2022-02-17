@@ -74,7 +74,10 @@ session_start();
                         $query = "SELECT imagen FROM producto_imagenes WHERE id_producto = $id_producto LIMIT 1";
                         $result_img = consultaSQL($conn,$query);
                         $imagen = $result_img->fetch_assoc();
-                        echo('
+                        $porcentaje = (($producto['precio']-$producto['descuento'])*100)/$producto['precio'];
+                        if ($producto['stock'] > 0){
+                        if (is_null($producto['descuento'])){
+                            echo('
                         <div class="item">
                                 <img class="product-image" src="' . $imagen["imagen"] . '" alt="">
                                 <div class="content">
@@ -85,6 +88,24 @@ session_start();
                                 </div>
                             </div>
                         ');
+
+                        }
+                        else {
+                            echo('
+                            <div class="item">
+                            <img class="product-image" src="' . $imagen["imagen"] . '" alt="">
+                            <div class="content">
+                                <p class="category">' . $producto["nombre_categoria"] . '</p>
+                                <h5 class="name">' . $producto["nombre"] . '</h5>
+                                <p class="price"><span class="old">$'.$producto['precio'].'</span><span class="new">$ '. number_format($producto["precio"], 2) .'</span></p>
+                                <a href="product.php?id='. $producto["id"] .'" class="btn-product">Ver producto</a>
+                            </div>
+                            <div class="discount">'.intval($porcentaje).'% OFF!</div>
+                        </div>
+                            ');
+                        }
+                    }
+                        
                     }
                 ?>
 

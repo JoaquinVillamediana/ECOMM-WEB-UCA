@@ -1,5 +1,67 @@
 <?php
 include_once('../../onlyadmin.php');
+include_once('../../db.php');
+$ID_edit = $_GET['product_id'];
+
+if ($_POST){
+    $id_cat=$_POST['category'];
+    $nombre=$_POST['name'];
+    $precio=$_POST['price'];
+    $details=$_POST['details'];
+    $stock=$_POST['stock'];
+    $descuento=$_POST['discount'];
+    $precioFinal = $precio-(($descuento/100)*$precio);
+    $images = $_POST['image'];
+    $attrs = $_POST['attr'];
+
+    $conn = conectarBD();
+    $query = "UPDATE producto SET id_categoria=$id_cat, nombre='$nombre', precio=$precio, detalles='$details', descuento=$precioFinal, stock=$stock
+    WHERE id=$ID_edit";
+    
+    consultaSQL($conn,$query);
+    desconectarBD($conn);
+    
+    // BORRAR IMAGENES Y ATTRS PARA DESPUES AGREGARLAS DE NUEVO
+
+    $conn2 = conectarBD();
+    $query2 = "DELETE FROM producto_imagenes WHERE id_producto=$ID_edit";
+    consultaSQL($conn2,$query2);
+    desconectarBD($conn2);
+
+    $conn3 = conectarBD();
+    $query3 = "DELETE FROM producto_atributo WHERE id_producto=$ID_edit";
+    consultaSQL($conn3,$query3);
+    desconectarBD($conn3);
+
+    print_r($images);
+
+    foreach($images as $img_url){
+        if ($img_url!=""){
+            $imagen = "assets/img/".$img_url;
+            $conn4 = conectarBD();
+            $query4 = "INSERT INTO producto_imagenes (id_producto, imagen) VALUES ($ID_edit, '$imagen')";
+            
+            consultaSQL($conn4,$query4);
+            desconectarBD($conn4);
+        }
+
+    }
+    foreach($attrs as $attr){
+        if ($attr!=""){
+            $conn5 = conectarBD();
+            $query5 = "INSERT INTO producto_atributo (id_producto, nombre) VALUES ($ID_edit, '$attr')";
+            consultaSQL($conn5,$query5);
+            desconectarBD($conn5);
+            
+        }
+    }
+    
+    
+
+
+    // header("Location: index.php");
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,18 +96,61 @@ include_once('../../onlyadmin.php');
 
     <div class="container main-container">
         <h1>Editar Producto</h1>
-        <form action="" id="productForm">
+        <form action="" method="POST" id="productForm">
+            <?php 
+            
+            $conn = conectarBD();
+            $query = "SELECT * from producto WHERE producto.id='$ID_edit'";
+            $result = consultaSQL($conn,$query);
+            desconectarBD($conn);
+
+            while ($row = $result->fetch_assoc()){
+                $nombre = $row['nombre'];
+                $id_cat = $row['id_categoria'];
+                $precio = $row['precio'];
+                $descuento = $row['descuento'];
+                $stock = $row['stock'];
+                $detalles = $row['detalles'];
+            }
+            $attrs = [];
+            $conn2 = conectarBD();
+            $query2 = "SELECT nombre from producto_atributo WHERE id_producto='$ID_edit'";
+            $result2 = consultaSQL($conn2,$query2); 
+            while ($row = $result2->fetch_assoc()){
+                array_push($attrs,$row['nombre']);
+            }
+
+            $imgs = [];
+            $conn3 = conectarBD();
+            $query3 = "SELECT imagen from producto_imagenes WHERE id_producto='$ID_edit'";
+            $result3 = consultaSQL($conn3,$query3); 
+            while ($row = $result3->fetch_assoc()){
+                array_push($imgs,$row['imagen']);
+                
+            }
+            ?>
             <div class="item" id="name">
                 <label for="">Nombre</label>
-                <input type="text" name="name" value="Pelota ADX40" id="name-input">
+                <input type="text" name="name" value="<?php echo $nombre; ?>" id="name-input">
                 <span class="error">Campo obligatorio (min 3 car. max 60 car.)</span>
             </div>
             <div class="item" id="category">
                 <label for="">Categoria</label>
-                <select name="" id="category-input">
-                    <option selected value="">Pelotas</option>
-                    <option value="">Remeras</option>
-                    <option value="">Pantalones</option>
+                <select name="category" id="category-input">
+                <?php 
+                $conn = conectarBD();
+                $query = "select * from categoria";
+                $resultado = consultaSQL($conn,$query);
+                if ($resultado->num_rows >0){
+                    while ($row = $resultado->fetch_assoc()){
+                        $add = '';
+                        if ($row['id']==$id_cat){
+                            $add = 'selected';
+                        }
+                        ?>
+                        <option <?php echo $add;?> value=<?php echo $row['id'];?>><?php echo $row['nombre'];?></option>
+                    <?php }
+                } ?>
                 </select>
             </div>
             <div class="item" id="image">
@@ -53,9 +158,13 @@ include_once('../../onlyadmin.php');
                 <input type="file" onchange="addImage(this)" name="image[]" id="img-4">
                 <div class="current-images">
                     <ul id="ul-imgs">
-                        <li>lorem.png<a href="" onclick="delImage(1)" id="del-img-1" class="del-img">X</a></li>
-                        <li>loremipsum.png<a href="" onclick="delImage(2)" id="del-img-2" class="del-img">X</a></li>
-                        <li>loremlorem.png<a href="" onclick="delImage(3)" id="del-img-3" class="del-img">X</a></li>
+                        <?php 
+                        $i=1;
+                        foreach($imgs as $img){
+                            ?>
+                            <li><?php echo $img; ?><a href="" onclick="delImage(<?php echo $i; ?>)" id="del-img-<?php echo $i; ?>" class="del-img">X</a></li>
+
+                    <?php $i=$i+1; } ?>
                     </ul>
                 </div>
             </div>
@@ -67,40 +176,38 @@ include_once('../../onlyadmin.php');
                 </div>
                 <div class="current-attrs">
                     <ul id="ul-attr">
-                        <li>AZUL<a href="" onclick="delAttr(1)" id="del-attr-1" class="del-attr">X</a></li>
-                        <li>BLANCA<a href="" onclick="delAttr(2)" id="del-attr-2" class="del-attr">X</a></li>
-                        <li>VERDE<a href="" onclick="delAttr(3)" id="del-attr-3" class="del-attr">X</a></li>
+                        <?php 
+                        $i=1;
+                        foreach($attrs as $attr){
+                            ?>
+                            <li><?php echo $attr ?><a href="" onclick="delAttr(<?php echo $i ?>)" id="del-attr-<?php echo $i ?>" class="del-attr">X</a></li>
+                        <?php $i=$i+1;}
+
+                        ?>
+                        
                     </ul>
                 </div>
             </div>
             <div class="price-combo">
                 <div class="item" id="price">
                     <label for="">Precio (AR$)</label>
-                    <input type="number" value="4500" name="price" id="price-input">
+                    <input type="number" value="<?php echo $precio; ?>" name="price" id="price-input">
                     <span class="error">Campo obligatorio. Numerico</span>
                 </div>
                 <div class="item" id="discount">
                     <label for="">Descuento (%)</label>
-                    <input type="number" value="5" name="discount" id="discount-input">
+                    <input type="number" value=<?php echo $descuento; ?> name="discount" id="discount-input">
                     <span class="error">Campo obligatorio.</span>
                 </div>
             </div>
             <div class="item" id="stock">
                 <label for="">Stock</label>
-                <input type="number" min="0" name="stock" value="23" id="stock-input">
+                <input type="number" min="0" name="stock" value=<?php echo $stock; ?> id="stock-input">
                 <span class="error">Campo obligatorio. Numerico</span>
             </div>
             <div class="item" id="details">
                 <label for="">Detalles</label>
-                <textarea name="" cols="30" id="details-input" rows="10">Pelota de Fútbol futsal GOL DE ORO STAR | Nº4
-
-                    Material: cuero sintetico vulcanizado
-                    Color:naranja, blanco, amarillo
-                    peso reglamentario: 400gr
-                    Tamaño:nº4
-                    gajos pegados
-                    tipo de pique: medio pique
-                    circunferencia: 65 cm
+                <textarea name="details" cols="30" id="details-input" name="details" rows="10"><?php echo $detalles; ?>
                 </textarea>
                 <span class="error">Campo obligatorio. (min 3 car. max 1050 car.)</span>
             </div>
