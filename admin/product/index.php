@@ -63,7 +63,7 @@ if ($_POST && !empty($_POST['product_id'])) {
                             <th>Categoria</th>
                             <th>Precio</th>
                             <th></th>
-                            <th></th>
+                          
                         </tr>
                     </thead>
                     <tbody>

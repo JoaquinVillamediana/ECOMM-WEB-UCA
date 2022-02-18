@@ -196,7 +196,7 @@ if ($_POST){
                         $i=1;
                         foreach($imgs as $img){
                             ?>
-                            <li><?php echo $img; ?><a href="" onclick="delImage(<?php echo $i; ?>)" id="del-img-<?php echo $i; ?>" class="del-img">X</a></li>
+                            <li class="old-img"><?php echo $img; ?><a href="" onclick="delImage(<?php echo $i; ?>)" id="del-img-<?php echo $i; ?>" class="del-img">X</a></li>
 
                     <?php $i=$i+1; } ?>
                     </ul>

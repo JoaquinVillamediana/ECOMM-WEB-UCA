@@ -55,6 +55,13 @@ function addImage(object) {
 
     marker.innerHTML = img_name + '<a href="" onclick="delImage(' + img_id + ')" id="del-img-' + img_id + '" class="del-img">X</a>';
     img_list.append(marker);
+
+    var old_imgs = document.getElementsByClassName("old-img");
+    if (old_imgs.length > 0) {
+        for (img of old_imgs) {
+            img.parentNode.removeChild(img);
+        }
+    }
 }
 
 function delImage(id) {
