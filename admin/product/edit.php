@@ -12,7 +12,7 @@ if ($_POST){
     $descuento=$_POST['discount'];
     if(empty($_POST['discount']))
     {
-        $descuento = NULL;
+        $descuento = 0;
     }
     $images = $_POST['image'];
     $attrs = $_POST['attr'];
