@@ -65,7 +65,18 @@ include('db.php');
                                 <div class="content">
                                     <p class="category"><?php echo $producto['nom_cat']?></p>
                                     <h5 class="name"><?php echo $producto['nom_prod']?></h5>
-                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['precioFinal']?></span></p>
+                                    <p class="price">
+                                    <?php
+                                        $precio = $producto['precio'];
+                                        if($producto['descuento'] > 0){
+                                            echo("<span class=\"old\">$$precio</span>");
+                                            echo ("<span class=\"new\">$$precioFinal</span>");
+                                        }
+                                        else{
+                                            echo("<span class=\"new\">$$precio</span>");
+                                        }
+                                    ?> 
+                                    </p>
                                     <a href="product.php?id=<?php echo strval($producto["id"]) ?>" class="btn-product">Ver producto</a>
                                 </div>
                                 <?php if ($producto['descuento'] > 0){?>
