@@ -10,28 +10,64 @@ if ($_POST){
     $details=$_POST['details'];
     $stock=$_POST['stock'];
     $descuento=$_POST['discount'];
+    if(empty($_POST['discount']))
+    {
+        $descuento = NULL;
+    }
     $images = $_POST['image'];
     $attrs = $_POST['attr'];
     $conn = conectarBD();
     $query = "UPDATE producto SET id_categoria=$id_cat, nombre='$nombre', precio=$precio, detalles='$details', descuento=$descuento, stock=$stock
     WHERE id=$ID_edit";
+
     
     consultaSQL($conn,$query);
     desconectarBD($conn);
     
     // BORRAR IMAGENES Y ATTRS PARA DESPUES AGREGARLAS DE NUEVO
 
-    $conn2 = conectarBD();
-    $query2 = "DELETE FROM producto_imagenes WHERE id_producto=$ID_edit";
-    consultaSQL($conn2,$query2);
-    desconectarBD($conn2);
+    if(count($images) == 1)
+    {
+        if($images[0] != "")
+        {
+            $conn2 = conectarBD();
+            $query2 = "SET FOREIGN_KEY_CHECKS=0;";
+            consultaSQL($conn2,$query2);
+            $query2 = "DELETE FROM producto_imagenes WHERE id_producto=$ID_edit;";
+            
+            consultaSQL($conn2,$query2);
+            $query2 = "SET FOREIGN_KEY_CHECKS=1;";
+            consultaSQL($conn2,$query2);
+            desconectarBD($conn2);
+        }
+    }else
+    {
+        $conn2 = conectarBD();
+        $query2 = "SET FOREIGN_KEY_CHECKS=0;";
+        consultaSQL($conn2,$query2);
+        $query2 = "DELETE FROM producto_imagenes WHERE id_producto=$ID_edit;";
+        
+        consultaSQL($conn2,$query2);
+        $query2 = "SET FOREIGN_KEY_CHECKS=1;";
+        consultaSQL($conn2,$query2);
+        desconectarBD($conn2);
+    }
 
-    $conn3 = conectarBD();
-    $query3 = "DELETE FROM producto_atributo WHERE id_producto=$ID_edit";
-    consultaSQL($conn3,$query3);
-    desconectarBD($conn3);
+    if(!empty($attrs) && count($attrs) > 0)
+    {
+        $conn3 = conectarBD();
+        $query3 = "SET FOREIGN_KEY_CHECKS=0;";
+        consultaSQL($conn3,$query3);
+        $query3 = "DELETE FROM producto_atributo WHERE id_producto=$ID_edit;";
+        consultaSQL($conn3,$query3);
+        $query3 = "SET FOREIGN_KEY_CHECKS=1;";
+        consultaSQL($conn3,$query3);
 
-    print_r($images);
+        desconectarBD($conn3);    
+    }
+    
+
+    // print_r($images);
 
     foreach($images as $img_url){
         if ($img_url!=""){
@@ -179,6 +215,7 @@ if ($_POST){
                         foreach($attrs as $attr){
                             ?>
                             <li><?php echo $attr ?><a href="" onclick="delAttr(<?php echo $i ?>)" id="del-attr-<?php echo $i ?>" class="del-attr">X</a></li>
+                            <input type="hidden" name="attrs[]" id="attr-<?php echo $i ?>" value="<?php echo $attr ?>">
                         <?php $i=$i+1;}
 
                         ?>
@@ -194,7 +231,7 @@ if ($_POST){
                 </div>
                 <div class="item" id="discount">
                     <label for="">Descuento (%)</label>
-                    <input type="number" value=<?php echo $descuento; ?> name="discount" id="discount-input">
+                    <input type="number" value="<?php echo $descuento; ?>"  id="discount-input" name="discount">
                     <span class="error">Campo obligatorio.</span>
                 </div>
             </div>

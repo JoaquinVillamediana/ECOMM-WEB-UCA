@@ -28,8 +28,9 @@ if($_GET["option"] == 2)
         $query2 = 'UPDATE producto SET stock = (producto.stock + '. $row["cantidad"] .') WHERE id = '.$row["id_producto"].'
     ';
         consultaSQL($conn2, $query2);
+        desconectarBD($conn2);
     }
-    desconectarBD($conn2);
+    
 }
 
 desconectarBD($conn);
