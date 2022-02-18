@@ -9,17 +9,11 @@ if ($_POST){
     $details=$_POST['details'];
     $stock=$_POST['stock'];
     $descuento=$_POST['discount'];
-    if ($descuento==0){
-        $precioFinal='NULL';
-    }
-    else{
-        $precioFinal = $precio-(($descuento/100)*$precio);
-    }
     $img = $_POST['image'];
     $attrs = $_POST['attr'];
     
     $conn = conectarBD();
-    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $precioFinal, $stock)";
+    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $descuento, $stock)";
     consultaSQL($conn,$query);
     desconectarBD($conn);
 

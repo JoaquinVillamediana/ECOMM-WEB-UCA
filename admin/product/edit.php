@@ -10,17 +10,10 @@ if ($_POST){
     $details=$_POST['details'];
     $stock=$_POST['stock'];
     $descuento=$_POST['discount'];
-    if ($descuento==0){
-        $precioFinal='NULL';
-    }
-    else{
-        $precioFinal = $precio-(($descuento/100)*$precio);
-    }
     $images = $_POST['image'];
     $attrs = $_POST['attr'];
-
     $conn = conectarBD();
-    $query = "UPDATE producto SET id_categoria=$id_cat, nombre='$nombre', precio=$precio, detalles='$details', descuento=$precioFinal, stock=$stock
+    $query = "UPDATE producto SET id_categoria=$id_cat, nombre='$nombre', precio=$precio, detalles='$details', descuento=$descuento, stock=$stock
     WHERE id=$ID_edit";
     
     consultaSQL($conn,$query);
