@@ -33,6 +33,7 @@ session_start();
         $result = consultaSQL($conn,$query);
         $producto = $result->fetch_assoc();
         echo('<script>cantidad_max = '.$producto["stock"].'</script>');
+        $precioFinal = $producto['precio'] - $producto['precio']*($producto['descuento']/100);;
         if($producto && $producto["stock"] > 0){
             $query = "SELECT imagen FROM producto_imagenes WHERE id_producto = $id_producto";
             $result = consultaSQL($conn,$query);
@@ -76,7 +77,7 @@ session_start();
                 echo('</div>');
             }
             echo('
-                <p class="price">$ '.number_format($producto["precio"], 2).' </p>
+                <p class="price"><span class="old">$'.$producto['precio'].'<span class="new"> $'.$precioFinal.'</p>
                 ');
             if(!empty($_SESSION['user']))
             {
