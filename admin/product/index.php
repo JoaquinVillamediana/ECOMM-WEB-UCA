@@ -4,6 +4,16 @@ include_once('../../db.php');
 
 if ($_POST && !empty($_POST['product_id'])) {
     $conn = conectarBD();
+    $query = 'DELETE FROM carrito_productos WHERE id_producto = ' . $_POST['product_id'] . ';';
+    consultaSQL($conn, $query);
+
+    $query = 'DELETE FROM producto_atributo WHERE id_producto = ' . $_POST['product_id'] . ';';
+    consultaSQL($conn, $query);
+
+    $query = 'DELETE FROM producto_imagenes WHERE id_producto = ' . $_POST['product_id'] . ';';
+    consultaSQL($conn, $query);
+
+
     $query = 'DELETE FROM producto WHERE id = ' . $_POST['product_id'] . ';';
     consultaSQL($conn, $query);
     desconectarBD($conn);

@@ -72,7 +72,7 @@ desconectarBD($conn2);
     </section>
     <section class="top-products">
         <div class="container">
-            <h2 class="title">Productos</h2>
+            <h2 class="title">Todos los productos</h2>
 
             <div class="items">
                 <?php 

@@ -4,6 +4,10 @@ include_once('../../db.php');
 
 if ($_POST && !empty($_POST['user_id'])) {
     $conn = conectarBD();
+    $query = 'DELETE FROM carrito_productos WHERE id_carrito = (SELECT id FROM carrito WHERE id_usuario = ' . $_POST['user_id'] . ' LIMIT 1);';
+    consultaSQL($conn, $query);
+    $query = 'DELETE FROM carrito WHERE id_usuario = ' . $_POST['user_id'] . ';';
+    consultaSQL($conn, $query);
     $query = 'DELETE FROM usuarios WHERE id = ' . $_POST['user_id'] . ';';
     consultaSQL($conn, $query);
     desconectarBD($conn);
