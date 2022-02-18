@@ -28,7 +28,8 @@
             $query = "SELECT fecha, pedidos.id as id,pedidos.id_estado, envio_direccion, estados.nombre as estado_nombre
                       FROM pedidos
                       JOIN estados ON id_estado = estados.id
-                      WHERE id_usuario = $id_usuario";
+                      WHERE id_usuario = $id_usuario
+                      ORDER BY fecha desc";
             $result = consultaSQL($conn, $query);
             if($result->num_rows > 0){
             while($pedido = $result->fetch_assoc()){

@@ -7,5 +7,3 @@
 - cambiar cantidad en el carrito.php (pincha)
 - anular carrito si no hay stock??? (pincha)
 
-- checkear stock de los productos para venderlos
-- revisar que el descuento se muestre en todos lados

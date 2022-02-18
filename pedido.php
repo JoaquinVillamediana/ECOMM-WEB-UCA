@@ -56,14 +56,27 @@
                     // No existe el pedido o es de un cliente distinto al logueado
                     header("location: index.php");                   
                 }
-            
+                $aEstado;
+                switch($pedido["id_estado"])
+                {
+                    case 1:
+                        $aEstado = ["Pago Pendiente","yellow"];
+                        break;
+                        case 2:
+                            $aEstado = ["Pago Aprobado","green"];
+                            break;
+                            case 3:
+                                $aEstado = ["Pago Cancelado","red"];
+                                break;
+                }
             ?>
+            
                 <h2 class="header">Resumen del pedido #<?php echo $_GET["id"]; ?></h2>
                 <div class="resumen section header">
                     <h2 class="header">Gracias por comprar en nuestra tienda</h2>
                     <p>Tu numero de pedido es: <?php echo $_GET["id"]; ?></p>
                     <p class="small">Durante las proximas horas te estaremos contactando via mail para actualizarte el estado del pedido</p>
-                    <p class="small">Estado del pedido: <span class="yellow"><?php echo $pedido["estado_nombre"] ?></span></p>
+                    <p class="small">Estado del pedido: <span class="<?php  echo $aEstado[1] ?>"><?php echo $pedido["estado_nombre"] ?></span></p>
                 </div>
                 <div class="resumen section productos">
                     <h2 class="header">Productos:</h2>

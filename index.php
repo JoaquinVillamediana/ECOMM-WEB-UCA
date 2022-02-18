@@ -41,11 +41,10 @@ desconectarBD($conn2);
             <div class="items">
                 <?php 
                     $conn = conectarBD();
-                    $query = 'SELECT categoria.nombre as nom_cat, producto.nombre as nom_prod, producto.precio as precio, producto.id as id, 
-                    producto_imagenes.imagen as url_img, producto.descuento as descuento from producto 
-                    INNER JOIN categoria ON producto.id_categoria=categoria.id
-                    INNER JOIN producto_imagenes ON producto.id=producto_imagenes.id_producto 
-                    WHERE descuento IS NOT NULL and stock > 0';;
+                    $query = 'SELECT producto.nombre as nom_prod, producto.precio as precio, producto.id as id, categoria.nombre as nom_cat, (SELECT imagen FROM producto_imagenes WHERE id_producto = producto.id LIMIT 1) as url_img, producto.descuento as descuento
+                    FROM producto 
+                    JOIN categoria ON categoria.id = producto.id_categoria
+                    WHERE descuento > 0 AND stock > 0';
                     $result = consultaSQL($conn,$query);
                     $id="";
                     while ($producto = $result->fetch_assoc()){
@@ -87,7 +86,7 @@ desconectarBD($conn2);
                         $imagen = $result_img->fetch_assoc();
                         $precioFinal = $producto['precio'] - $producto['precio']*($producto['descuento']/100);
                         if ($producto['stock'] > 0){
-                        if (is_null($producto['descuento'])){
+                        if ($producto['descuento'] == 0){
                             echo('
                         <div class="item">
                                 <img class="product-image" src="' . $imagen["imagen"] . '" alt="">

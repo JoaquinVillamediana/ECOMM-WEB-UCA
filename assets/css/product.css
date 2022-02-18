@@ -8,6 +8,17 @@
     float: left;
 }
 
+.old{
+    color: #ccc;
+    text-decoration: line-through;
+}
+
+.new{
+    color: #0e36c9;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .main-container .images {
     padding: 5%;
     padding-left: 0px;

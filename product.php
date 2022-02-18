@@ -77,7 +77,12 @@ session_start();
                 echo('</div>');
             }
             echo('
-                <p class="price"><span class="old">$'.$producto['precio'].'<span class="new"> $'.$precioFinal.'</p>
+                <p class="price">');
+            if($precioFinal != $producto['precio']) {
+                echo('<span class="old">$'.$producto['precio'].'</span>');
+            }
+                    
+            echo('        <span class="new"> $'.$precioFinal.'</span></p>
                 ');
             if(!empty($_SESSION['user']))
             {

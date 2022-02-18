@@ -1,5 +1,19 @@
 <?php
     include_once("onlyclientes.php");
+    function traer_carrito_productos($id_carrito, $conn){
+        // Me fijo si existe el carrito
+        $query = "SELECT producto.precio as precio, producto.descuento as descuento, cantidad
+                  FROM carrito_productos
+                  JOIN producto ON carrito_productos.id_producto = producto.id
+                  WHERE id_carrito = $id_carrito";
+        $res = consultaSQL($conn, $query);
+        if($res->num_rows < 1)
+        {
+            $res = NULL;
+        }
+        return $res;
+    }
+
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         include_once("db.php");
         $userid = $_SESSION["userid"];
@@ -10,7 +24,7 @@
         $expiracion = $_POST["expiracion"];
         $cvc = $_POST["cvc"];
         // consigo el carrito
-        $query = "SELECT *, (SELECT SUM((cantidad * producto.precio)) as subtotal FROM carrito_productos JOIN producto ON producto.id = carrito_productos.id_producto WHERE id_carrito = carrito.id) as importe
+        $query = "SELECT *
                   FROM carrito 
                   WHERE id_usuario = $userid";
         $result = consultaSQL($conn, $query);
@@ -19,10 +33,15 @@
         $nombre = $carrito["nombre"];
         $direccion = $carrito["direccion"];
         $telefono = $carrito["telefono"];
-        $importe = $carrito["importe"];
         $dni = $carrito["dni"];
         $envio = $carrito["envio"];
-
+        // Conseguir el importe
+        $importe = 0;
+        $carritos_productos = traer_carrito_productos($carrito["id"], $conn);
+        while($cp = $carritos_productos->fetch_assoc()){
+            $precioFinal = $cp['precio'] - $cp['precio']*($cp["descuento"] /100);
+            $importe += $precioFinal * $cp["cantidad"];
+        }
         // TODO: Reviso si hay stock de todo
         
 
@@ -33,7 +52,7 @@
         $id_pedido = $conn->insert_id;
         // Hago los pedido_producto
         $query = "INSERT INTO pedidos_producto(id_pedido, id_producto, id_atributo, cantidad, precio_unitario)
-                  SELECT $id_pedido as id_pedido, id_producto, id_atributo, cantidad, producto.precio as precio_unitario
+                  SELECT $id_pedido as id_pedido, id_producto, id_atributo, cantidad, (producto.precio - (producto.precio * (producto.descuento / 100))) as precio_unitario
                   FROM carrito_productos 
                   JOIN producto on producto.id = carrito_productos.id_producto 
                   WHERE id_carrito = $id_carrito";
