@@ -50,17 +50,18 @@ desconectarBD($conn2);
                     $id="";
                     while ($producto = $result->fetch_assoc()){
                         if ($producto['id']!=$id){
-                            $porcentaje = (($producto['precio']-$producto['descuento'])*100)/$producto['precio'];
+                            $precioFinal = $producto['precio'] - $producto['precio']*($producto['descuento']/100);
+                            
                         ?>
                             <div class="item">
                                 <img class="product-image" src=<?php echo $producto['url_img'] ?> alt="">
                                 <div class="content">
                                     <p class="category"><?php echo $producto['nom_cat']?></p>
                                     <h5 class="name"><?php echo $producto['nom_prod']?></h5>
-                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['descuento']?></span></p>
+                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo number_format($precioFinal,2)?></span></p>
                                     <a href="product.php?id=<?php echo strval($producto["id"]) ?>" class="btn-product">Ver producto</a>
                                 </div>
-                                <div class="discount"><?php echo intval($porcentaje)?>% OFF!</div>
+                                <div class="discount"><?php echo intval($producto['descuento'])?>% OFF!</div>
                             </div>
 
                     <?php $id = $producto['id'];
@@ -84,7 +85,7 @@ desconectarBD($conn2);
                         $query = "SELECT imagen FROM producto_imagenes WHERE id_producto = $id_producto LIMIT 1";
                         $result_img = consultaSQL($conn,$query);
                         $imagen = $result_img->fetch_assoc();
-                        $porcentaje = (($producto['precio']-$producto['descuento'])*100)/$producto['precio'];
+                        $precioFinal = $producto['precio'] - $producto['precio']*($producto['descuento']/100);
                         if ($producto['stock'] > 0){
                         if (is_null($producto['descuento'])){
                             echo('
@@ -107,10 +108,10 @@ desconectarBD($conn2);
                             <div class="content">
                                 <p class="category">' . $producto["nombre_categoria"] . '</p>
                                 <h5 class="name">' . $producto["nombre"] . '</h5>
-                                <p class="price"><span class="old">$'.$producto['precio'].'</span><span class="new">$ '. number_format($producto["descuento"], 2) .'</span></p>
+                                <p class="price"><span class="old">$'.$producto['precio'].'</span><span class="new">$ '. number_format($precioFinal, 2) .'</span></p>
                                 <a href="product.php?id='. $producto["id"] .'" class="btn-product">Ver producto</a>
                             </div>
-                            <div class="discount">'.intval($porcentaje).'% OFF!</div>
+                            <div class="discount">'.intval($producto['descuento']).'% OFF!</div>
                         </div>
                             ');
                         }
