@@ -4,8 +4,13 @@ include_once('../../db.php');
 
 if ($_POST && !empty($_POST['category_id'])) {
     $conn = conectarBD();
-    $query = 'DELETE FROM categoria WHERE id = ' . $_POST['category_id'] . ';';
-    consultaSQL($conn, $query);
+    try {
+        $query = 'DELETE FROM categoria WHERE id = ' . $_POST['category_id'] . ';';
+        consultaSQL($conn, $query);
+    } catch (\Throwable $th) {
+        
+    }
+    
     desconectarBD($conn);
 }
 

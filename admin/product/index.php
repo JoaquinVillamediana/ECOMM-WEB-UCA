@@ -4,6 +4,9 @@ include_once('../../db.php');
 
 if ($_POST && !empty($_POST['product_id'])) {
     $conn = conectarBD();
+    $query = "SET FOREIGN_KEY_CHECKS=0;";
+    consultaSQL($conn,$query);
+
     $query = 'DELETE FROM carrito_productos WHERE id_producto = ' . $_POST['product_id'] . ';';
     consultaSQL($conn, $query);
 
@@ -16,6 +19,10 @@ if ($_POST && !empty($_POST['product_id'])) {
 
     $query = 'DELETE FROM producto WHERE id = ' . $_POST['product_id'] . ';';
     consultaSQL($conn, $query);
+
+    $query = "SET FOREIGN_KEY_CHECKS=1;";
+    consultaSQL($conn,$query);
+
     desconectarBD($conn);
 }
 ?>
