@@ -57,17 +57,21 @@ include('db.php');
                     $id="";
                     while ($producto = $result->fetch_assoc()){
                         if ($producto['id']!=$id){
-                            $porcentaje = (($producto['precio']-$producto['descuento'])*100)/$producto['precio'];
+                            $precioFinal = $producto['precio'] - $producto['precio']*($producto['descuento']/100);
+                            
                         ?>
                             <div class="item">
                                 <img class="product-image" src=<?php echo $producto['url_img'] ?> alt="">
                                 <div class="content">
                                     <p class="category"><?php echo $producto['nom_cat']?></p>
                                     <h5 class="name"><?php echo $producto['nom_prod']?></h5>
-                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['descuento']?></span></p>
+                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['precioFinal']?></span></p>
                                     <a href="product.php?id=<?php echo strval($producto["id"]) ?>" class="btn-product">Ver producto</a>
                                 </div>
-                                <div class="discount"><?php echo intval($porcentaje)?>% OFF!</div>
+                                <?php if ($producto['descuento'] > 0){?>
+                                    <div class="discount"><?php echo intval($producto['descuento'])?>% OFF!</div>
+                                <?php } ?>
+                                
                             </div>
 
                     <?php $id = $producto['id'];
