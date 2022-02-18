@@ -123,6 +123,7 @@ function validateFields() {
 
     if (!errors) {
         document.getElementById("productForm").submit();
+
     }
 }
 

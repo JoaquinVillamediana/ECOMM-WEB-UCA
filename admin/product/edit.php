@@ -10,7 +10,12 @@ if ($_POST){
     $details=$_POST['details'];
     $stock=$_POST['stock'];
     $descuento=$_POST['discount'];
-    $precioFinal = $precio-(($descuento/100)*$precio);
+    if ($descuento==0){
+        $precioFinal='NULL';
+    }
+    else{
+        $precioFinal = $precio-(($descuento/100)*$precio);
+    }
     $images = $_POST['image'];
     $attrs = $_POST['attr'];
 
@@ -59,7 +64,7 @@ if ($_POST){
     
 
 
-    // header("Location: index.php");
+    header("Location: index.php");
 
 }
 ?>

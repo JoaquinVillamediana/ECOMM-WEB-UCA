@@ -9,12 +9,17 @@ if ($_POST){
     $details=$_POST['details'];
     $stock=$_POST['stock'];
     $descuento=$_POST['discount'];
-    $precioFinal = $precio-(($descuento/100)*$precio);
+    if ($descuento==0){
+        $precioFinal='NULL';
+    }
+    else{
+        $precioFinal = $precio-(($descuento/100)*$precio);
+    }
     $img = $_POST['image'];
     $attrs = $_POST['attr'];
     
     $conn = conectarBD();
-    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $descuento, $stock)";
+    $query = "INSERT INTO producto (id_categoria, nombre, precio, detalles, descuento, stock) VALUES ($id_cat, '$nombre', $precio, '$details', $precioFinal, $stock)";
     consultaSQL($conn,$query);
     desconectarBD($conn);
 
@@ -36,7 +41,6 @@ if ($_POST){
         }
 
     }
-    header("Location: index.php");
     foreach($attrs as $attr){
         if ($attr!=""){
             $conn4 = conectarBD();
@@ -46,7 +50,7 @@ if ($_POST){
             
         }
     }
-    
+    header("Location: index.php");
 
 }
 
@@ -133,7 +137,7 @@ if ($_POST){
                 </div>
                 <div class="item" id="discount">
                     <label for="">Descuento (%)</label>
-                    <input type="number" name="discount" id="discount-input">
+                    <input type="number" name="discount" id="discount-input" value=0>
                     <span class="error">Campo obligatorio.</span>
                 </div>
             </div>
