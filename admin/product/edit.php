@@ -207,6 +207,14 @@ if ($_POST){
                 <div class="combo" id="attr-combo">
                     <input type="text" name="attrs" id="attr-input" data-attr-id="4">
                     <a href="" onclick="addAttr()" class="attr-submit">Cargar</a>
+                    <?php 
+                        $i=1;
+                        foreach($attrs as $attr){
+                            ?>
+                            <input type="hidden" name="attr[]" id="attr-<?php echo $i ?>" value="<?php echo $attr ?>">
+                        <?php $i=$i+1;}
+
+                        ?>
                 </div>
                 <div class="current-attrs">
                     <ul id="ul-attr">
@@ -215,7 +223,7 @@ if ($_POST){
                         foreach($attrs as $attr){
                             ?>
                             <li><?php echo $attr ?><a href="" onclick="delAttr(<?php echo $i ?>)" id="del-attr-<?php echo $i ?>" class="del-attr">X</a></li>
-                            <input type="hidden" name="attrs[]" id="attr-<?php echo $i ?>" value="<?php echo $attr ?>">
+                            
                         <?php $i=$i+1;}
 
                         ?>
