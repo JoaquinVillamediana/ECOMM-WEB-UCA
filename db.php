@@ -1,7 +1,5 @@
 <?php
 
-// https://www.w3schools.com/php/php_ref_mysqli.asp
-
 function conectarBD()
 {
     $servername = "localhost";

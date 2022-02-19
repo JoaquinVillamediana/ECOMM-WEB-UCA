@@ -58,6 +58,7 @@ include_once('../../db.php');
                          LEFT JOIN pedidos_producto 
                          ON(pedidos_producto.id_pedido = pedidos.id) 
                          GROUP BY (pedidos.id)
+                         ORDER BY fecha desc
                          ';
                          $respuesta = consultaSQL($conn, $query);
                         

@@ -42,7 +42,7 @@
             $precioFinal = $cp['precio'] - $cp['precio']*($cp["descuento"] /100);
             $importe += $precioFinal * $cp["cantidad"];
         }
-        // TODO: Reviso si hay stock de todo
+        
         
 
         // Hago el pedido

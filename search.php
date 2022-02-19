@@ -102,9 +102,11 @@ include('db.php');
                         }
 
                         $result = consultaSQL($conn,$query);
+                        
                         $id="";
                         while ($producto = $result->fetch_assoc()){
                             if ($producto['id']!=$id){
+                            $precioFinal = $producto['precio'] - $producto['precio']*($producto['descuento']/100);
                                 $porcentaje = (($producto['precio']-$producto['descuento'])*100)/$producto['precio'];
                             ?>
                             <div class="item">
@@ -112,18 +114,25 @@ include('db.php');
                                 <div class="content">
                                     <p class="category"><?php echo $producto['nom_cat']?></p>
                                     <h5 class="name"><?php echo $producto['nom_prod']?></h5>
-                                    <?php if($porcentaje != 100){?>
-                                    <p class="price"><span class="old">$<?php echo $producto['precio']?></span> <span class="new">$<?php echo $producto['descuento']?></span></p>
-                                    <?php }else{ ?>
-                                        <p class="price">$<?php echo $producto['precio']?></p>
-                                    <?php }?>
+                                    <p class="price">
+                                    <?php
+                                        $precio = $producto['precio'];
+                                        if($producto['descuento'] > 0){
+                                            echo("<span class=\"old\">$$precio</span>");
+                                            echo ("<span class=\"new\">$$precioFinal</span>");
+                                        }
+                                        else{
+                                            echo("<span class=\"new\">$$precio</span>");
+                                        }
+                                    ?> 
+                                    </p>
                                     <a href="product.php?id=<?php echo strval($producto["id"]) ?>" class="btn-product">Ver producto</a>
                                 </div>
-                                <?php if($porcentaje != 100){?>
-                                <div class="discount"><?php echo intval($porcentaje)?>% OFF!</div>
+                                <?php if ($producto['descuento'] > 0){?>
+                                    <div class="discount"><?php echo intval($producto['descuento'])?>% OFF!</div>
                                 <?php } ?>
+                                
                             </div>
-
                         <?php $id = $producto['id'];
                             }
                         }
